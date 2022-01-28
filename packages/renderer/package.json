@@ -1,0 +1,15 @@
+{
+  "name": "@maxwell-blog/renderer",
+  "version": "1.0.0",
+  "description": "",
+  "author": "MaxChang3",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "lib"
+  ]
+}
