@@ -16,4 +16,4 @@ async function readFileContent(folder: string, filename: string, options?: readF
     return fileContent
 }
 
-export { readFileContent, getFilePath, configPath }
+export { readFileContent, getFilePath, configPath, __dirname }
