@@ -1,3 +1,7 @@
-import { readConfig } from "@maxwell-blog/context";
+import { readConfig, readPostContext} from "@maxwell-blog/context";
 
-readConfig()
+let config = await readConfig()
+console.log(config)
+
+let post = await readPostContext("_posts","testpost.md");
+console.log(post.frontMatter)
