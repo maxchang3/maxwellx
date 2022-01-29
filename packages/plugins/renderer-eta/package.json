@@ -1,0 +1,20 @@
+{
+  "name": "@maxwell-blog/renderer-eta",
+  "version": "1.0.0",
+  "description": "",
+  "author": "MaxChang3",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "@maxwell-blog/context": "workspace:^1.0.0",
+    "@maxwell-blog/renderer": "workspace:^1.0.0",
+    "eta": "^1.12.3"
+  }
+}

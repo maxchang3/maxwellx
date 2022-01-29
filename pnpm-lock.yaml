@@ -27,6 +27,16 @@ importers:
     devDependencies:
       '@types/js-yaml': registry.npmmirror.com/@types/js-yaml/4.0.5
 
+  packages/plugins/renderer-eta:
+    specifiers:
+      '@maxwell-blog/context': workspace:^1.0.0
+      '@maxwell-blog/renderer': workspace:^1.0.0
+      eta: ^1.12.3
+    dependencies:
+      '@maxwell-blog/context': link:../../context
+      '@maxwell-blog/renderer': link:../../renderer
+      eta: registry.npmmirror.com/eta/1.12.3
+
   packages/renderer:
     specifiers: {}
 
@@ -34,9 +44,11 @@ importers:
     specifiers:
       '@maxwell-blog/context': workspace:^1.0.0
       '@maxwell-blog/renderer': workspace:^1.0.0
+      '@maxwell-blog/renderer-eta': workspace:^1.0.0
     dependencies:
       '@maxwell-blog/context': link:../packages/context
       '@maxwell-blog/renderer': link:../packages/renderer
+      '@maxwell-blog/renderer-eta': link:../packages/plugins/renderer-eta
 
 packages:
 
@@ -497,6 +509,13 @@ packages:
     version: 2.1.1
     engines: {node: '>=8'}
     dev: true
+
+  registry.npmmirror.com/eta/1.12.3:
+    resolution: {integrity: sha1-KYLQit++85+fpQ4vvULXM35zOLE=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eta/download/eta-1.12.3.tgz}
+    name: eta
+    version: 1.12.3
+    engines: {node: '>=6.0.0'}
+    dev: false
 
   registry.npmmirror.com/fill-range/7.0.1:
     resolution: {integrity: sha1-GRmmp8df44ssfHflGYU12prN2kA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fill-range/download/fill-range-7.0.1.tgz}
