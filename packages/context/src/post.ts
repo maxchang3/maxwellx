@@ -1,5 +1,5 @@
 import { readFileContent } from "./utils.js"
-import type {frontMatter, postContext} from './types'
+import type { frontMatter, postContext } from './types'
 import yaml from "js-yaml";
 
 async function parseFrontMatter(content: string) {
@@ -27,4 +27,4 @@ async function readPostContext(folder: string, filename: string) {
     return context
 }
 
-export {parseFrontMatter,readPostContext}
+export { parseFrontMatter, readPostContext }

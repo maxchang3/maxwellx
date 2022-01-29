@@ -5,4 +5,4 @@ async function readConfig() {
     return config
 }
 
-export {readConfig}
+export { readConfig }
