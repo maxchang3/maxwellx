@@ -1,16 +1,16 @@
-
 interface renderData {
     content: string
 }
 
-type renderFunc = (data: renderData, context:any ,options: object) => string;
+type renderFunc = (data: renderData, context: any, options?: object) => Promise<string>;
 
 
-interface maxRenderer{
+interface maxRenderer {
     input: string;
     output: string;
     dir: string;
     callback: renderFunc;
+    render(data: renderData, context: any, options: object): Promise<string> 
 }
 
 interface renderers {
@@ -20,7 +20,7 @@ interface renderers {
 interface maxRendererList {
     context: any
     rendererList: renderers
-    register(renderer:maxRenderer): void
+    register(renderer: maxRenderer): void
 }
 
 

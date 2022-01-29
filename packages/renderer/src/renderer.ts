@@ -1,4 +1,4 @@
-import type { maxRenderer, maxRendererList, renderFunc, renderers } from "./types";
+import type { maxRenderer, maxRendererList, renderFunc, renderers, renderData } from "./types";
 
 export class RendererList implements maxRendererList {
     context: any;
@@ -34,8 +34,11 @@ export class Renderer implements maxRenderer {
     output: string;
     dir: string;
     callback: renderFunc;
-    constructor(input: string, output: string, dir:string, callback: renderFunc) {
-        [this.input, this.output,this.dir, this.callback] = [input, output,  dir , callback]
-    }
 
+    constructor(input: string, output: string, dir: string, callback: renderFunc) {
+        [this.input, this.output, this.dir, this.callback] = [input, output, dir, callback]
+    }
+    async render(data: renderData, context: any, options?: object) {
+        return await this.callback(data, context, options)
+    }
 }
