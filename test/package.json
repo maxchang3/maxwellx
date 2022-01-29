@@ -5,7 +5,8 @@
   "type": "module",
   "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:renderer": "pnpm -C ../packages/renderer build && tsc && node lib/renderer.test.js",
+    "test:context": "pnpm -C ../packages/context build && tsc && node lib/context.test.js"
   },
   "author": "MaxChang3",
   "license": "MIT",
