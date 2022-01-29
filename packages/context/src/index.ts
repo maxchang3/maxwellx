@@ -1,8 +1,13 @@
 import path  from "path";
+import { promises as fs}  from "fs";
 
 const __dirname = process.cwd();
 
 const configPath = path.join(__dirname, 'maxwell.config.js')
+
+async function readFileContent(filenpath:string) {
+    return await fs.readFile('/etc/passwd');
+}
 
 async function readConfig() {
     let config = (await import(configPath)).default
@@ -12,4 +17,4 @@ async function readConfig() {
 async function readMarkdownFrontMatter(){
 
 }
-export {readConfig}
+export {readConfig,readFileContent}
