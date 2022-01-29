@@ -1,0 +1,3 @@
+<p><%= it.test %></p>
+
+<%~ includeFile('./footer') %>

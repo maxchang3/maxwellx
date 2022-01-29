@@ -1,21 +1,24 @@
 import {Renderer,RendererList} from '@maxwell-blog/renderer'
+import { readPostContext} from "@maxwell-blog/context";
 
-let renderList = new RendererList({context:'qwq'})
+import { etaRenderer } from "@maxwell-blog/renderer-eta";
 
-let pug_renderer = new Renderer("pug","html","./theme/",(data,context,options)=>{
-    return `render:${data.content}`
-})
+let test = await etaRenderer.render({content:"test.eta"},{test:1})
 
-let scss_renderer = new Renderer("scss","css","./theme/",(data,context,options)=>{
-    return `render:${data.content}`
-})
+console.log(test)
+// let renderList = new RendererList({context:'qwq'})
 
-renderList.register(pug_renderer);
-renderList.register(scss_renderer);
+// let pug_renderer = new Renderer("pug","html","./theme/",(data,context,options)=>{
+//     return `render:${data.content}`
+// })
 
-// for(let render of renderers){
-//     console.log(render.callback)
-// }
+// let scss_renderer = new Renderer("scss","css","./theme/",(data,context,options)=>{
+//     return `render:${data.content}`
+// })
 
+// let post = await readPostContext("source/_posts","testpost.md");
 
-renderList.render()
+// renderList.register(pug_renderer);
+// renderList.register(scss_renderer);
+
+// renderList.render()
