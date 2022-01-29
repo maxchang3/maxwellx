@@ -2,5 +2,11 @@ interface readFileOptions {
     encoding?: BufferEncoding,
     escape?: boolean
 }
-
-export {readFileOptions}
+interface frontMatter {
+    [key: string]: any
+}
+interface postContext {
+    frontMatter: frontMatter
+    content: string
+}
+export { readFileOptions, postContext, frontMatter }
