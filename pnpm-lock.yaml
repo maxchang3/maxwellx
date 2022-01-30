@@ -27,6 +27,14 @@ importers:
     devDependencies:
       '@types/js-yaml': registry.npmmirror.com/@types/js-yaml/4.0.5
 
+  packages/core:
+    specifiers:
+      '@maxwell-blog/context': workspace:^1.0.0
+      '@maxwell-blog/renderer': workspace:^1.0.0
+    dependencies:
+      '@maxwell-blog/context': link:../context
+      '@maxwell-blog/renderer': link:../renderer
+
   packages/plugins/renderer-eta:
     specifiers:
       '@maxwell-blog/context': workspace:^1.0.0
