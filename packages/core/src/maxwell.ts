@@ -1,6 +1,8 @@
 import { context, readConfig, defaultConfig } from "@maxwellx/context";
 import { RendererList } from "@maxwellx/renderer";
 import { etaRenderer } from "@maxwellx/renderer-eta";
+import { getPostFilesContent } from "@maxwellx/post";
+
 import type { maxwellCore } from './types'
 
 class maxwell implements maxwellCore {
@@ -27,9 +29,18 @@ class maxwell implements maxwellCore {
         // this.rendererList.register(all)
     }
     async render() {
-        this.rendererList.render();
-        console.log(await etaRenderer.render([this.context.config.directory.template], "test", this.context))
-
+        // this.rendererList.render();
+        for await(let content of getPostFilesContent(this.context)){
+            let _context:context = {
+                config:this.context.config,
+                postContext: content
+            }
+            let result = await etaRenderer.render(
+                [this.context.config.directory.template], 
+                content.frontMatter.layout, 
+                _context)
+            console.log(result)
+        }
     }
 
 }

@@ -24,10 +24,12 @@ importers:
   packages/core:
     specifiers:
       '@maxwellx/context': workspace:^1.0.0
+      '@maxwellx/post': workspace:^1.0.0
       '@maxwellx/renderer': workspace:^1.0.0
       '@maxwellx/renderer-eta': workspace:^1.0.0
     dependencies:
       '@maxwellx/context': link:../context
+      '@maxwellx/post': link:../post
       '@maxwellx/renderer': link:../renderer
       '@maxwellx/renderer-eta': link:../plugins/renderer-eta
 

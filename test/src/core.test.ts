@@ -1,9 +1,9 @@
 import { maxwell } from "@maxwellx/core";
-import { getPostFilesContent } from "@maxwellx/post";
+// import { getPostFilesContent } from "@maxwellx/post";
 const core = new maxwell();
 await core.init();
-// core.render()
+core.render()
 
-for await(let content of getPostFilesContent(core.context)){
-    console.log(content)
-}
+// for await(let content of getPostFilesContent(core.context)){
+//     console.log(content)
+// }

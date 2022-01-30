@@ -8,5 +8,4 @@ async function* getPostFilesContent(context: context) {
          yield readPostContext(basepath,file)
     }
 }
-
 export { getPostFilesContent }

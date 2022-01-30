@@ -1,4 +1,4 @@
-<h1>test layout</h1>
+<h1>post layout</h1>
 <p><%= it.config.site.title %></p>
 <p><%= it.postContext.content %></p>
 <%~ includeFile('./footer') %>
