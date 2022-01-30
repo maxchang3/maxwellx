@@ -18,17 +18,18 @@ class maxwell implements maxwellCore {
     }
     async setConfig() {
         this.context.config = await readConfig()
-        console.log(this.context.config)
+       // console.log(this.context.config)
     }
     async setRenderer() {
         this.rendererList = new RendererList(this.context);
         this.rendererList.register(etaRenderer)
-        console.log(await etaRenderer.render([this.context.config.directory.template], "test", this.context))
         // for plugins renderer
         // this.rendererList.register(all)
     }
     async render() {
         this.rendererList.render();
+        console.log(await etaRenderer.render([this.context.config.directory.template], "test", this.context))
+
     }
 
 }
