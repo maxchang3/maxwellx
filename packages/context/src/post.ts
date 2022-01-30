@@ -20,6 +20,8 @@ async function readPostContext(folder: string[], filename: string) {
         frontMatter = {}
         postValue = content
     }
+    // 对于从这个函数读取的文件，除非做特殊声明否则默认 layout 按 post 处理。
+    if(!(frontMatter.layout)) frontMatter.layout = "post"
     let context: postContext = {
         frontMatter,
         content: postValue
