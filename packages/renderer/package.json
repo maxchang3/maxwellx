@@ -11,5 +11,8 @@
   },
   "files": [
     "lib"
-  ]
+  ],
+  "dependencies": {
+    "@maxwell-blog/context": "workspace:^1.0.0"
+  }
 }

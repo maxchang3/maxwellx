@@ -1,5 +1,6 @@
 interface renderData {
-    content: string
+    paths: string,
+    filename: string
 }
 
 type renderFunc = (data: renderData, context: any, options?: object) => Promise<string>;
@@ -8,9 +9,8 @@ type renderFunc = (data: renderData, context: any, options?: object) => Promise<
 interface maxRenderer {
     input: string;
     output: string;
-    dir: string;
     callback: renderFunc;
-    render(data: renderData, context: any, options: object): Promise<string> 
+    render(path:string[],filename:string, context: any, options?: object): Promise<string> 
 }
 
 interface renderers {
