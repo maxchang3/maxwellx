@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@maxwell-blog/context": "workspace:^1.0.0",
-    "@maxwell-blog/renderer": "workspace:^1.0.0"
+    "@maxwell-blog/renderer": "workspace:^1.0.0",
+    "@maxwell-blog/renderer-eta": "workspace:^1.0.0"
   }
 }

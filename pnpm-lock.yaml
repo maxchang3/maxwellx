@@ -31,9 +31,11 @@ importers:
     specifiers:
       '@maxwell-blog/context': workspace:^1.0.0
       '@maxwell-blog/renderer': workspace:^1.0.0
+      '@maxwell-blog/renderer-eta': workspace:^1.0.0
     dependencies:
       '@maxwell-blog/context': link:../context
       '@maxwell-blog/renderer': link:../renderer
+      '@maxwell-blog/renderer-eta': link:../plugins/renderer-eta
 
   packages/plugins/renderer-eta:
     specifiers:
@@ -46,15 +48,20 @@ importers:
       eta: registry.npmmirror.com/eta/1.12.3
 
   packages/renderer:
-    specifiers: {}
+    specifiers:
+      '@maxwell-blog/context': workspace:^1.0.0
+    dependencies:
+      '@maxwell-blog/context': link:../context
 
   test:
     specifiers:
       '@maxwell-blog/context': workspace:^1.0.0
+      '@maxwell-blog/core': workspace:^1.0.0
       '@maxwell-blog/renderer': workspace:^1.0.0
       '@maxwell-blog/renderer-eta': workspace:^1.0.0
     dependencies:
       '@maxwell-blog/context': link:../packages/context
+      '@maxwell-blog/core': link:../packages/core
       '@maxwell-blog/renderer': link:../packages/renderer
       '@maxwell-blog/renderer-eta': link:../packages/plugins/renderer-eta
 
