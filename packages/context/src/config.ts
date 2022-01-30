@@ -1,5 +1,6 @@
 import { configPath } from "./utils.js";
 import { configure } from "./types";
+
 async function readConfig() {
     let config = (await import(configPath)).default
     return config
@@ -8,4 +9,6 @@ async function readConfig() {
 function returnConfig(config:configure):configure {
     return config
 }
+
+
 export { readConfig,returnConfig}
