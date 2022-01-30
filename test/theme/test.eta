@@ -1,3 +1,3 @@
-<p><%= it.test %></p>
+<p><%= it.config.site.title %></p>
 
 <%~ includeFile('./footer') %>

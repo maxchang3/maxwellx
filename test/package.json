@@ -6,12 +6,14 @@
   "main": "lib/index.js",
   "scripts": {
     "test:renderer": "pnpm -C ../packages/renderer build && tsc && node lib/renderer.test.js",
-    "test:context": "pnpm -C ../packages/context build && tsc && node lib/context.test.js"
+    "test:context": "pnpm -C ../packages/context build && tsc && node lib/context.test.js",
+    "test:core": "tsc && pnpm -C ../packages/renderer build && pnpm -C ../packages/context build && pnpm -C ../packages/plugins/renderer-eta build &&  pnpm -C ../packages/core build &&node lib/core.test.js"
   },
   "author": "MaxChang3",
   "license": "MIT",
   "dependencies": {
     "@maxwell-blog/context": "workspace:^1.0.0",
+    "@maxwell-blog/core": "workspace:^1.0.0",
     "@maxwell-blog/renderer": "workspace:^1.0.0",
     "@maxwell-blog/renderer-eta": "workspace:^1.0.0"
   }
