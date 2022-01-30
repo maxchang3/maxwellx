@@ -19,7 +19,7 @@ async function getFiles(...folder: string[]) {
     let files = await fs.readdir(getFilePath(folder))
     const fileStatPromise = files.map(file => fs.lstat(getFilePath(folder, file)))
     const fileStat = await Promise.all(fileStatPromise)
-    files = files.filter((_file, index) => !(fileStat[index].isDirectory()))
+    files = files.filter((_file, index) => fileStat[index].isFile())
     return files
 }
 
