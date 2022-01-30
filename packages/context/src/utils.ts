@@ -11,16 +11,14 @@ function getFilePath(folder: string[], filename?: string) {
 }
 /** 
 遍历指定目录下文件与目录，并判断是否为文件。
-由于每次 Promise 为真，在 filter 中无法直接获取 stat.isDirectory。
-这里先使用 map 获取所有 Promise，再用 Promise.all 接收后 await。
-考虑到后期拓展性与性能优化，这里不使用同步版本的 fs。
+实现为异步迭代生成器，先使用 map 生成所有 promise，再依次返回。
 */
-async function getFiles(...folder: string[]) {
+async function* getFiles(...folder: string[]) {
     let files = await fs.readdir(getFilePath(folder))
     const fileStatPromise = files.map(file => fs.lstat(getFilePath(folder, file)))
-    const fileStat = await Promise.all(fileStatPromise)
-    files = files.filter((_file, index) => fileStat[index].isFile())
-    return files
+    for (let [index, fileStat] of fileStatPromise.entries()) {
+        if ((await fileStat).isFile())  yield files[index]
+    }
 }
 
 async function readFileContent(folder: string[], filename: string, options?: readFileOptions) {
