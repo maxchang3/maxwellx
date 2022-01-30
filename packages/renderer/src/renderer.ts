@@ -39,7 +39,7 @@ export class Renderer implements maxRenderer {
     constructor(input: string, output: string, callback: renderFunc) {
         [this.input, this.output,  this.callback] = [input, output,  callback]
     }
-    async render(path:string[],filename:string, context: any, options?: object) {
+    async render(path:string[],filename:string, context: context, options?: object) {
         return this.callback({
             paths: getFilePath(path),
             filename :`${filename}.${this.input}`
