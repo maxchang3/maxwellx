@@ -8,7 +8,7 @@ async function parseFrontMatter(content: string) {
 }
 
 
-async function readPostContext(folder: string, filename: string) {
+async function readPostContext(folder: string[], filename: string) {
     let content = await readFileContent(folder, filename)
     const frontMatterReg = /---(.*?)---/sg
     let frontMatterText = frontMatterReg.exec(content)
