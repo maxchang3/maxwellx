@@ -1,4 +1,4 @@
-import { returnConfig } from "@maxwell-blog/context";
+import { returnConfig } from "@maxwellx/context";
 
 export default returnConfig ({
     site: {

@@ -1,5 +1,5 @@
-import type { context } from '@maxwell-blog/context'
-import type { RendererList } from '@maxwell-blog/renderer'
+import type { context } from '@maxwellx/context'
+import type { RendererList } from '@maxwellx/renderer'
 
 interface maxwellCore {
     context:context,

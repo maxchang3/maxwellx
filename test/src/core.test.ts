@@ -1,4 +1,4 @@
-import { maxwell } from "@maxwell-blog/core";
+import { maxwell } from "@maxwellx/core";
 
 const core = new maxwell();
 await core.init();

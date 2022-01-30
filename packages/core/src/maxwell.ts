@@ -1,6 +1,6 @@
-import { context, readConfig, defaultConfig } from "@maxwell-blog/context";
-import { RendererList } from "@maxwell-blog/renderer";
-import { etaRenderer } from "@maxwell-blog/renderer-eta";
+import { context, readConfig, defaultConfig } from "@maxwellx/context";
+import { RendererList } from "@maxwellx/renderer";
+import { etaRenderer } from "@maxwellx/renderer-eta";
 import type { maxwellCore } from './types'
 
 class maxwell implements maxwellCore {

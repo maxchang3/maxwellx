@@ -1,6 +1,6 @@
 import type { maxRenderer, maxRendererList, renderFunc, renderers, renderData } from "./types";
-import type { context } from '@maxwell-blog/context'
-import { getFilePath } from "@maxwell-blog/context";
+import type { context } from '@maxwellx/context'
+import { getFilePath } from "@maxwellx/context";
 export class RendererList implements maxRendererList {
     context: context;
     rendererList: renderers = {};

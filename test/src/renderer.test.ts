@@ -1,7 +1,7 @@
-import {Renderer,RendererList} from '@maxwell-blog/renderer'
-import { readPostContext} from "@maxwell-blog/context";
+import {Renderer,RendererList} from '@maxwellx/renderer'
+import { readPostContext} from "@maxwellx/context";
 
-import { etaRenderer } from "@maxwell-blog/renderer-eta";
+import { etaRenderer } from "@maxwellx/renderer-eta";
 
 // let test = await etaRenderer.render({paths,},{test:1})
 

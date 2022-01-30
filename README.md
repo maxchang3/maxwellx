@@ -1,4 +1,4 @@
-# maxwell-blog
+# maxwellx
 # (WIP)
 A static site generator (especially blog) using TypeScript for learning purposes.
 

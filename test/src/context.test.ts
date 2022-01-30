@@ -1,4 +1,4 @@
-import { readConfig, readPostContext} from "@maxwell-blog/context";
+import { readConfig, readPostContext} from "@maxwellx/context";
 
 
 

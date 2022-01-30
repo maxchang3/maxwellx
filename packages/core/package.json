@@ -1,5 +1,5 @@
 {
-  "name": "@maxwell-blog/core",
+  "name": "@maxwellx/core",
   "version": "1.0.0",
   "description": "",
   "author": "MaxChang3",
@@ -10,8 +10,8 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@maxwell-blog/context": "workspace:^1.0.0",
-    "@maxwell-blog/renderer": "workspace:^1.0.0",
-    "@maxwell-blog/renderer-eta": "workspace:^1.0.0"
+    "@maxwellx/context": "workspace:^1.0.0",
+    "@maxwellx/renderer": "workspace:^1.0.0",
+    "@maxwellx/renderer-eta": "workspace:^1.0.0"
   }
 }

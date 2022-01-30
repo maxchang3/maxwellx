@@ -1,5 +1,5 @@
 {
-  "name": "@maxwell-blog/renderer-eta",
+  "name": "@maxwellx/renderer-eta",
   "version": "1.0.0",
   "description": "",
   "author": "MaxChang3",
@@ -13,8 +13,8 @@
     "lib"
   ],
   "dependencies": {
-    "@maxwell-blog/context": "workspace:^1.0.0",
-    "@maxwell-blog/renderer": "workspace:^1.0.0",
+    "@maxwellx/context": "workspace:^1.0.0",
+    "@maxwellx/renderer": "workspace:^1.0.0",
     "eta": "^1.12.3"
   }
 }

@@ -12,12 +12,6 @@ importers:
       nodemon: registry.npmmirror.com/nodemon/2.0.15
       typescript: registry.npmmirror.com/typescript/4.5.5
 
-  packages/api:
-    specifiers:
-      '@maxwell-blog/renderer': workspace:^1.0.0
-    dependencies:
-      '@maxwell-blog/renderer': link:../renderer
-
   packages/context:
     specifiers:
       '@types/js-yaml': ^4.0.5
@@ -29,41 +23,41 @@ importers:
 
   packages/core:
     specifiers:
-      '@maxwell-blog/context': workspace:^1.0.0
-      '@maxwell-blog/renderer': workspace:^1.0.0
-      '@maxwell-blog/renderer-eta': workspace:^1.0.0
+      '@maxwellx/context': workspace:^1.0.0
+      '@maxwellx/renderer': workspace:^1.0.0
+      '@maxwellx/renderer-eta': workspace:^1.0.0
     dependencies:
-      '@maxwell-blog/context': link:../context
-      '@maxwell-blog/renderer': link:../renderer
-      '@maxwell-blog/renderer-eta': link:../plugins/renderer-eta
+      '@maxwellx/context': link:../context
+      '@maxwellx/renderer': link:../renderer
+      '@maxwellx/renderer-eta': link:../plugins/renderer-eta
 
   packages/plugins/renderer-eta:
     specifiers:
-      '@maxwell-blog/context': workspace:^1.0.0
-      '@maxwell-blog/renderer': workspace:^1.0.0
+      '@maxwellx/context': workspace:^1.0.0
+      '@maxwellx/renderer': workspace:^1.0.0
       eta: ^1.12.3
     dependencies:
-      '@maxwell-blog/context': link:../../context
-      '@maxwell-blog/renderer': link:../../renderer
+      '@maxwellx/context': link:../../context
+      '@maxwellx/renderer': link:../../renderer
       eta: registry.npmmirror.com/eta/1.12.3
 
   packages/renderer:
     specifiers:
-      '@maxwell-blog/context': workspace:^1.0.0
+      '@maxwellx/context': workspace:^1.0.0
     dependencies:
-      '@maxwell-blog/context': link:../context
+      '@maxwellx/context': link:../context
 
   test:
     specifiers:
-      '@maxwell-blog/context': workspace:^1.0.0
-      '@maxwell-blog/core': workspace:^1.0.0
-      '@maxwell-blog/renderer': workspace:^1.0.0
-      '@maxwell-blog/renderer-eta': workspace:^1.0.0
+      '@maxwellx/context': workspace:^1.0.0
+      '@maxwellx/core': workspace:^1.0.0
+      '@maxwellx/renderer': workspace:^1.0.0
+      '@maxwellx/renderer-eta': workspace:^1.0.0
     dependencies:
-      '@maxwell-blog/context': link:../packages/context
-      '@maxwell-blog/core': link:../packages/core
-      '@maxwell-blog/renderer': link:../packages/renderer
-      '@maxwell-blog/renderer-eta': link:../packages/plugins/renderer-eta
+      '@maxwellx/context': link:../packages/context
+      '@maxwellx/core': link:../packages/core
+      '@maxwellx/renderer': link:../packages/renderer
+      '@maxwellx/renderer-eta': link:../packages/plugins/renderer-eta
 
 packages:
 
@@ -542,7 +536,7 @@ packages:
     dev: true
 
   registry.npmmirror.com/fsevents/2.3.2:
-    resolution: {integrity: sha1-ilJveLj99GI7cJ4Ll1xSwkwC/Ro=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fsevents/download/fsevents-2.3.2.tgz}
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/fsevents/-/fsevents-2.3.2.tgz}
     name: fsevents
     version: 2.3.2
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
