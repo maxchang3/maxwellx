@@ -1,5 +1,6 @@
 # maxwellx
 # (WIP)
+<img src="./maxwell.png" style="text-align:center">
 A static site generator (especially blog) using TypeScript for learning purposes.
 
 
