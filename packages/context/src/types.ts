@@ -9,7 +9,7 @@ interface postContext {
     frontMatter: frontMatter
     content: string
 }
-interface configure{
+interface configure {
     /** site information */
     site: {
         /** site title */
@@ -27,7 +27,7 @@ interface configure{
         permalink: string
     },
     /** site directory */
-    directory:{
+    directory: {
         /** source file (mostly markdown) directroty */
         source: string,
         /** public dir to generate to */
@@ -40,4 +40,10 @@ interface configure{
     /** plugins */
     plugins: string[]
 }
-export { readFileOptions, postContext, frontMatter,configure }
+interface context {
+    config: configure,
+    postContext?: postContext
+}
+
+
+export { readFileOptions, postContext, frontMatter, configure, context }
