@@ -1,7 +1,7 @@
 # maxwellx
 # (WIP)
 <p align="center">
-<img src="./maxwell.png" style="max-width:60%;">
+<img src="./maxwell.png" style="width:40%; height:40%">
 </p>
 
 A static site generator (especially blog) using TypeScript for learning purposes.
