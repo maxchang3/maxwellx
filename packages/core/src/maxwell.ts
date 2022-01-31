@@ -1,5 +1,6 @@
 import { context, readConfig, defaultConfig } from "@maxwellx/context";
 import { etaRenderer } from "@maxwellx/renderer-eta";
+import { markdownitRenderer } from "@maxwellx/renderer-markdown-it";
 import { getPostFilesContent } from "@maxwellx/post";
 
 import type { maxwellCore } from './types'
@@ -21,6 +22,7 @@ class maxwell implements maxwellCore {
     async render() {
         // this.rendererList.render();
         for await(let content of getPostFilesContent(this.context)){
+            content.content = await markdownitRenderer.render(content,this.context)
             let _context:context = {
                 config:this.context.config,
                 postContext: content

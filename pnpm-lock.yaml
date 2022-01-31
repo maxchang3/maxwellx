@@ -27,11 +27,13 @@ importers:
       '@maxwellx/post': workspace:^1.0.0
       '@maxwellx/renderer': workspace:^1.0.0
       '@maxwellx/renderer-eta': workspace:^1.0.0
+      '@maxwellx/renderer-markdown-it': workspace:^1.0.0
     dependencies:
       '@maxwellx/context': link:../context
       '@maxwellx/post': link:../post
       '@maxwellx/renderer': link:../renderer
       '@maxwellx/renderer-eta': link:../plugins/renderer-eta
+      '@maxwellx/renderer-markdown-it': link:../plugins/renderer-markdown-it
 
   packages/plugins/renderer-eta:
     specifiers:
