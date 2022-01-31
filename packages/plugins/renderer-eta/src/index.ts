@@ -6,7 +6,7 @@ const etaRenderer = new RendererWithRead("eta","html",async(data,context,options
     configure({
         views: data.path
     })
-    return renderFile(data.filename, context) as Promise<string>;
+    return renderFile(data.filename, context,{ autoEscape: false }) as Promise<string>;
 })
 
 export {etaRenderer}
