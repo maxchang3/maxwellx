@@ -1,4 +1,4 @@
-import {Renderer,RendererList} from '@maxwellx/renderer'
+import {Renderer} from '@maxwellx/renderer'
 import { readPostContext} from "@maxwellx/context";
 
 import { etaRenderer } from "@maxwellx/renderer-eta";

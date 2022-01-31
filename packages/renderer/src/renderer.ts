@@ -1,48 +1,34 @@
-import type { maxRenderer, maxRendererList, renderFunc, renderers, renderData } from "./types";
+import type { maxRenderer, maxRendererList, renderFunc, renderers, rendererWithRead, renderData, renderFuncWithRead } from "./types";
 import type { context } from '@maxwellx/context'
 import { getFilePath } from "@maxwellx/context";
-export class RendererList implements maxRendererList {
-    context: context;
-    rendererList: renderers = {};
 
-    constructor(context: context) {
-        this.context = context
+
+export class RendererWithRead  implements rendererWithRead {
+    input: string;
+    output: string;
+    callback: renderFuncWithRead;
+
+    constructor(input: string, output: string, callback: renderFuncWithRead) {
+        [this.input, this.output, this.callback] = [input, output, callback]
     }
 
-    register(renderer: Renderer): void {
-        this.rendererList[renderer.input] = renderer
-    }
-
-    render() {
-        // for (let renderer of this) {
-        //     // layout
-        //     let rendering = renderer.render({
-        //         paths: getFilePath([this.context.config.directory.template]),
-        //         filename :`test.${renderer.input}`
-        //     },this.context)
-        //     rendering.then(res=>console.log(res))
-        // }
-    }
-
-    *[Symbol.iterator]() {
-        for (let renderer of Object.values(this.rendererList)) {
-            yield renderer;
-        }
+    async render(path: string[], filename: string, context: context, options?: object) {
+        return this.callback({
+            path: getFilePath(path),
+            filename: `${filename}.${this.input}`
+        }, context, options)
     }
 }
 
 export class Renderer implements maxRenderer {
-    input: string;
-    output: string;
+    data: renderData;
     callback: renderFunc;
 
-    constructor(input: string, output: string, callback: renderFunc) {
-        [this.input, this.output,  this.callback] = [input, output,  callback]
+    constructor(data: renderData, callback: renderFunc) {
+        [this.data, this.callback] = [data, callback]
     }
-    async render(path:string[],filename:string, context: context, options?: object) {
-        return this.callback({
-            paths: getFilePath(path),
-            filename :`${filename}.${this.input}`
-        }, context, options)
+    render(data: renderData, context: context, options?: object): Promise<string> {
+        return this.callback(data, context, options)
     }
+
 }

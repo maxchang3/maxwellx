@@ -1,16 +1,29 @@
-interface renderData {
-    paths: string,
+import { context } from "@maxwellx/context";
+
+interface renderFilepath {
+    path: string,
     filename: string
 }
 
-type renderFunc = (data: renderData, context: any, options?: object) => Promise<string>;
+interface renderData {
+    content: string
+}
+
+type renderFuncWithRead = (data: renderFilepath, context: context, options?: object) => Promise<string>;
+type renderFunc = (data: renderData, context: context, options?: object) => Promise<string>;
 
 
-interface maxRenderer {
+interface rendererWithRead {
     input: string;
     output: string;
-    callback: renderFunc;
+    callback: renderFuncWithRead;
     render(path:string[],filename:string, context: any, options?: object): Promise<string> 
+}
+
+interface  maxRenderer{
+    data: renderData;
+    callback: renderFunc;
+    render(data:renderData, context: any, options?: object): Promise<string> 
 }
 
 interface renderers {
@@ -24,4 +37,4 @@ interface maxRendererList {
 }
 
 
-export { renderers, renderData, maxRenderer, maxRendererList, renderFunc }
+export { renderers, renderFilepath, renderData, maxRenderer, rendererWithRead,maxRendererList, renderFunc ,renderFuncWithRead}
