@@ -4,7 +4,7 @@
 <img src="./maxwell.png" style="width:40%; height:40%">
 </p>
 
-A static site generator (especially blog) base onTypeScript for learning purposes.
+A static site generator (especially blog) base on TypeScript for learning purposes.
 
 
 # Concepts
