@@ -21,13 +21,12 @@ export class RendererWithRead  implements rendererWithRead {
 }
 
 export class Renderer implements maxRenderer {
-    data: renderData;
-    callback: renderFunc;
+   callback: renderFunc;
 
-    constructor(data: renderData, callback: renderFunc) {
-        [this.data, this.callback] = [data, callback]
+    constructor( callback: renderFunc) {
+        [this.callback] = [callback]
     }
-    render(data: renderData, context: context, options?: object): Promise<string> {
+    render( data:renderData ,context: context, options?: object): Promise<string> {
         return this.callback(data, context, options)
     }
 

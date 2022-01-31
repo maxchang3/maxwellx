@@ -21,7 +21,6 @@ interface rendererWithRead {
 }
 
 interface  maxRenderer{
-    data: renderData;
     callback: renderFunc;
     render(data:renderData, context: any, options?: object): Promise<string> 
 }
