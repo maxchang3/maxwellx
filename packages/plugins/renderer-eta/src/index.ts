@@ -1,4 +1,3 @@
-import { __dirname } from "@maxwellx/context"
 import { RendererWithRead } from "@maxwellx/renderer";
 import {renderFile,configure} from "eta"
 
