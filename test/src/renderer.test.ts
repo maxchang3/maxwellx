@@ -1,5 +1,5 @@
-import {Renderer} from '@maxwellx/renderer'
-import { readPostContext} from "@maxwellx/context";
+import { Renderer } from '@maxwellx/renderer'
+import { readPostContext } from "@maxwellx/post";
 
 import { etaRenderer } from "@maxwellx/renderer-eta";
 

@@ -1,13 +1,13 @@
-interface readFileOptions {
-    encoding?: BufferEncoding,
-    escape?: boolean
-}
 interface frontMatter {
     [key: string]: any
 }
 interface postContext {
     frontMatter: frontMatter
     content: string
+}
+interface readFileOptions {
+    encoding?: BufferEncoding,
+    escape?: boolean
 }
 interface configure {
     /** site information */
@@ -53,4 +53,4 @@ interface context {
 }
 
 
-export { readFileOptions, postContext, frontMatter, configure, context }
+export { readFileOptions, configure, context ,postContext,frontMatter}
