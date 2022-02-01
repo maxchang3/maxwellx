@@ -1,0 +1,5 @@
+function definePlugin(){
+
+}
+
+export {definePlugin}
