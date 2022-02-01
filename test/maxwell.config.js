@@ -1,6 +1,6 @@
 import { returnConfig } from "@maxwellx/context";
 
-export default returnConfig ({
+export default returnConfig({
     site: {
         title: "张麦麦的博客",
         author: "张麦麦",
@@ -10,14 +10,14 @@ export default returnConfig ({
         root: "/",
         permalink: ":year/:month/:day/:title/"
     },
-    directory:{
+    directory: {
         source: "source",
         public: "public",
         template: "theme"
     },
-    renderer:{
-        template:"@maxwell/renderer-eta",
-        markdown:"@maxwell/renderer-markdown-it"
+    renderer: {
+        template: "@maxwell/renderer-eta",
+        markdown: "@maxwell/renderer-markdown-it"
     },
     template: "default",
     plugins: [
