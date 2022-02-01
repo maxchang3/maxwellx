@@ -16,6 +16,10 @@ const defaultConfig:configure = {
         public: "public",
         template: "template"
     },
+    renderer:{
+        template:"@maxwell/renderer-eta",
+        markdown:"@maxwell/renderer-markdown-it"
+    },
     template: "default",
     plugins: []
 }
@@ -46,6 +50,11 @@ function getSafeConfig(config:Partial<configure>):configure{
 
     config.template ??= defaultConfig.template
     config.plugins ??= defaultConfig.plugins
+
+    config.renderer ??= defaultConfig.renderer
+
+    config.renderer.markdown ??= defaultConfig.renderer.markdown
+    config.renderer.template ??= defaultConfig.renderer.template
 
     return config as configure
 }

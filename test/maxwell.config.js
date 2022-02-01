@@ -15,6 +15,10 @@ export default returnConfig ({
         public: "public",
         template: "theme"
     },
+    renderer:{
+        template:"@maxwell/renderer-eta",
+        markdown:"@maxwell/renderer-markdown-it"
+    },
     template: "default",
     plugins: [
         "maxwell-renderer-pug"
