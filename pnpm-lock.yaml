@@ -23,11 +23,13 @@ importers:
 
   packages/core:
     specifiers:
+      '@maxwellx/api': workspace:^1.0.0
       '@maxwellx/context': workspace:^1.0.0
       '@maxwellx/post': workspace:^1.0.0
       '@maxwellx/renderer-eta': workspace:^1.0.0
       '@maxwellx/renderer-markdown-it': workspace:^1.0.0
     dependencies:
+      '@maxwellx/api': link:../api
       '@maxwellx/context': link:../context
       '@maxwellx/post': link:../post
       '@maxwellx/renderer-eta': link:../plugins/renderer-eta
@@ -75,16 +77,16 @@ importers:
 
   test:
     specifiers:
+      '@maxwellx/api': workspace:^1.0.0
       '@maxwellx/context': workspace:^1.0.0
       '@maxwellx/core': workspace:^1.0.0
       '@maxwellx/post': workspace:^1.0.0
-      '@maxwellx/renderer': workspace:^1.0.0
       '@maxwellx/renderer-eta': workspace:^1.0.0
     dependencies:
+      '@maxwellx/api': link:../packages/api
       '@maxwellx/context': link:../packages/context
       '@maxwellx/core': link:../packages/core
       '@maxwellx/post': link:../packages/post
-      '@maxwellx/renderer': link:../packages/renderer
       '@maxwellx/renderer-eta': link:../packages/plugins/renderer-eta
 
 packages:
