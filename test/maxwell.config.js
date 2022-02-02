@@ -16,8 +16,8 @@ export default returnConfig({
         template: "theme"
     },
     renderer: {
-        template: "@maxwell/renderer-eta",
-        markdown: "@maxwell/renderer-markdown-it"
+        template: "@maxwellx/renderer-eta",
+        markdown: "@maxwellx/renderer-markdown-it"
     },
     template: "default",
     plugins: [
