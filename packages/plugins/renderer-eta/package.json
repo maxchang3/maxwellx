@@ -13,8 +13,8 @@
     "lib"
   ],
   "dependencies": {
+    "@maxwellx/api": "workspace:^1.0.0",
     "@maxwellx/context": "workspace:^1.0.0",
-    "@maxwellx/renderer": "workspace:^1.0.0",
     "eta": "^1.12.3"
   }
 }

@@ -1,5 +1,5 @@
 import { __dirname } from "@maxwellx/context"
-import { Renderer, withContent } from "@maxwellx/renderer";
+import { Renderer, withContent } from "@maxwellx/api";
 import MarkdownIt from "markdown-it";
 
 const md = MarkdownIt()

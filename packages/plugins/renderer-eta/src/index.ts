@@ -1,5 +1,5 @@
-import { Renderer } from "@maxwellx/renderer";
-import type { withReading } from "@maxwellx/renderer";
+import { Renderer } from "@maxwellx/api";
+import type { withReading } from "@maxwellx/api";
 import { renderFile, configure } from "eta"
 
 const etaRenderer = new Renderer<withReading>(async (data, context, options) => {
