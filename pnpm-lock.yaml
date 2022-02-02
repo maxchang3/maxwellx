@@ -12,6 +12,12 @@ importers:
       nodemon: registry.npmmirror.com/nodemon/2.0.15
       typescript: registry.npmmirror.com/typescript/4.5.5
 
+  packages/api:
+    specifiers:
+      '@maxwellx/context': workspace:^1.0.0
+    dependencies:
+      '@maxwellx/context': link:../context
+
   packages/context:
     specifiers:
       '@types/js-yaml': ^4.0.5
@@ -22,35 +28,33 @@ importers:
     specifiers:
       '@maxwellx/context': workspace:^1.0.0
       '@maxwellx/post': workspace:^1.0.0
-      '@maxwellx/renderer': workspace:^1.0.0
       '@maxwellx/renderer-eta': workspace:^1.0.0
       '@maxwellx/renderer-markdown-it': workspace:^1.0.0
     dependencies:
       '@maxwellx/context': link:../context
       '@maxwellx/post': link:../post
-      '@maxwellx/renderer': link:../renderer
       '@maxwellx/renderer-eta': link:../plugins/renderer-eta
       '@maxwellx/renderer-markdown-it': link:../plugins/renderer-markdown-it
 
   packages/plugins/renderer-eta:
     specifiers:
+      '@maxwellx/api': workspace:^1.0.0
       '@maxwellx/context': workspace:^1.0.0
-      '@maxwellx/renderer': workspace:^1.0.0
       eta: ^1.12.3
     dependencies:
+      '@maxwellx/api': link:../../api
       '@maxwellx/context': link:../../context
-      '@maxwellx/renderer': link:../../renderer
       eta: registry.npmmirror.com/eta/1.12.3
 
   packages/plugins/renderer-markdown-it:
     specifiers:
+      '@maxwellx/api': workspace:^1.0.0
       '@maxwellx/context': workspace:^1.0.0
-      '@maxwellx/renderer': workspace:^1.0.0
       '@types/markdown-it': ^12.2.3
       markdown-it: ^12.3.2
     dependencies:
+      '@maxwellx/api': link:../../api
       '@maxwellx/context': link:../../context
-      '@maxwellx/renderer': link:../../renderer
       markdown-it: registry.npmmirror.com/markdown-it/12.3.2
     devDependencies:
       '@types/markdown-it': registry.npmmirror.com/@types/markdown-it/12.2.3

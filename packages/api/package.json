@@ -13,7 +13,6 @@
     "lib"
   ],
   "dependencies": {
-  },
-  "devDependencies": {
+    "@maxwellx/context": "workspace:^1.0.0"
   }
 }
