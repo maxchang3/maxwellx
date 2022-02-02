@@ -1,7 +1,7 @@
-import { Renderer } from '@maxwellx/renderer'
+import Renderer from '@maxwellx/api'
 import { readPostContext } from "@maxwellx/post";
 
-import { etaRenderer } from "@maxwellx/renderer-eta";
+import etaRenderer from "@maxwellx/renderer-eta";
 
 // let test = await etaRenderer.render({paths,},{test:1})
 
