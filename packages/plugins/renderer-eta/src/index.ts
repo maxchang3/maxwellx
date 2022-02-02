@@ -11,11 +11,5 @@ const etaRenderer = new Renderer<withReading>(async (data, context, options) => 
     input: "eta",
     output: "html"
 })
-// const etaRenderer = new RendererWithRead("eta","html",async(data,context,options)=>{
-//     configure({
-//         views: data.path
-//     })
-//     return renderFile(data.filename, context,{ autoEscape: false }) as Promise<string>;
-// })
 
 export { etaRenderer }
