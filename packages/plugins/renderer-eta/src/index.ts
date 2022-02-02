@@ -1,4 +1,4 @@
-import { Renderer } from "@maxwellx/api";
+import { Renderer , definePlugin } from "@maxwellx/api";
 import type { withReading } from "@maxwellx/api";
 import { renderFile, configure } from "eta"
 
@@ -12,4 +12,4 @@ const etaRenderer = new Renderer<withReading>(async (data, context, options) => 
     output: "html"
 })
 
-export { etaRenderer }
+export default definePlugin(etaRenderer)
