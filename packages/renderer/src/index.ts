@@ -1,3 +1,3 @@
-export {Renderer } from './renderer.js'
+export { Renderer } from './renderer.js'
 
-export type {withContent , withReading  } from './types'
+export type { withContent, withReading } from './types'
