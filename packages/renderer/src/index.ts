@@ -1,3 +1,3 @@
 export {Renderer,RendererWithRead} from './renderer.js'
 
-export type {renderFunc} from './types'
+export type {withContent , maxRenderer, withReading } from './types'

@@ -1,14 +1,14 @@
-import type { maxRenderer, maxRendererList, renderFunc, renderers, rendererWithRead, renderData, renderFuncWithRead } from "./types";
+import type { maxRenderer, renderOptions, withContent,  rendererWithRead, renderData, withReading, renderFilepath } from "./types";
 import type { context } from '@maxwellx/context'
 import { getFilePath } from "@maxwellx/context";
 
 
-export class RendererWithRead  implements rendererWithRead {
+export class RendererWithRead implements rendererWithRead {
     input: string;
     output: string;
-    callback: renderFuncWithRead;
+    callback: withReading;
 
-    constructor(input: string, output: string, callback: renderFuncWithRead) {
+    constructor(input: string, output: string, callback: withReading) {
         [this.input, this.output, this.callback] = [input, output, callback]
     }
 
@@ -20,14 +20,23 @@ export class RendererWithRead  implements rendererWithRead {
     }
 }
 
-export class Renderer implements maxRenderer {
-   callback: renderFunc;
+export class Renderer<T extends (withContent | withReading)> implements maxRenderer<T> {
+    callback: T;
+    options?: renderOptions;
 
-    constructor( callback: renderFunc) {
-        [this.callback] = [callback]
+    constructor(callback: T, options?: renderOptions) {
+        [this.callback, this.options] = [callback, options]
     }
-    render( data:renderData ,context: context, options?: object): Promise<string> {
-        return this.callback(data, context, options)
+    render(data: (T extends withContent ? renderData : renderFilepath), context: context): Promise<string> {
+        if(this.options){
+            let _data = (<renderFilepath>data)
+            return (<withReading>this.callback)({
+                path: getFilePath([_data.path]),
+                filename: `${_data.filename}.${this.options.input}`
+            }, context)
+        }else{
+            return (<withContent>this.callback)(<renderData>data, context)  
+        }
     }
 
 }

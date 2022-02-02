@@ -27,10 +27,10 @@ class maxwell implements maxwellCore {
                 config:this.context.config,
                 postContext: content
             }
-            let result = await etaRenderer.render(
-                [this.context.config.directory.template], 
-                content.frontMatter.layout, 
-                _context)
+            let result = await etaRenderer.render({
+                filename:content.frontMatter.layout,
+                path:this.context.config.directory.template            
+            }, _context)
             console.log(result)
         }
     }

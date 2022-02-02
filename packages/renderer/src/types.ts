@@ -4,36 +4,29 @@ interface renderFilepath {
     path: string,
     filename: string
 }
-
 interface renderData {
     content: string
 }
 
-type renderFuncWithRead = (data: renderFilepath, context: context, options?: object) => Promise<string>;
-type renderFunc = (data: renderData, context: context, options?: object) => Promise<string>;
+type withReading = (data: renderFilepath, context: context, options?: object) => Promise<string>;
+type withContent = (data: renderData, context: context, options?: object) => Promise<string>;
 
 
 interface rendererWithRead {
     input: string;
     output: string;
-    callback: renderFuncWithRead;
-    render(path:string[],filename:string, context: any, options?: object): Promise<string> 
+    callback: withReading;
+    render(path: string[], filename: string, context: context, options?: object): Promise<string>
 }
-
-interface  maxRenderer{
-    callback: renderFunc;
-    render(data:renderData, context: any, options?: object): Promise<string> 
+interface renderOptions {
+    input: string;
+    output: string;
 }
-
-interface renderers {
-    [key: string]: maxRenderer
-}
-
-interface maxRendererList {
-    context: any
-    rendererList: renderers
-    register(renderer: maxRenderer): void
+interface maxRenderer<T extends (withContent | withReading)> {
+    callback: T;
+    options?: renderOptions;
+    render(data: (T extends withContent ? renderData : renderFilepath), context: context, options?: object): Promise<string>
 }
 
 
-export { renderers, renderFilepath, renderData, maxRenderer, rendererWithRead,maxRendererList, renderFunc ,renderFuncWithRead}
+export { renderFilepath, renderData, maxRenderer, rendererWithRead, withContent, withReading, renderOptions }
