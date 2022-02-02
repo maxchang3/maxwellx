@@ -1,24 +1,8 @@
-import type { maxRenderer, renderOptions, withContent,  rendererWithRead, renderData, withReading, renderFilepath } from "./types";
+import type { maxRenderer, renderOptions, withContent, renderData, withReading, renderFilepath } from "./types";
 import type { context } from '@maxwellx/context'
 import { getFilePath } from "@maxwellx/context";
 
 
-export class RendererWithRead implements rendererWithRead {
-    input: string;
-    output: string;
-    callback: withReading;
-
-    constructor(input: string, output: string, callback: withReading) {
-        [this.input, this.output, this.callback] = [input, output, callback]
-    }
-
-    async render(path: string[], filename: string, context: context, options?: object) {
-        return this.callback({
-            path: getFilePath(path),
-            filename: `${filename}.${this.input}`
-        }, context, options)
-    }
-}
 
 export class Renderer<T extends (withContent | withReading)> implements maxRenderer<T> {
     callback: T;
