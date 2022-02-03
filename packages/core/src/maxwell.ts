@@ -35,7 +35,7 @@ class maxwell implements maxwellCore {
             markdown: _markdown
         }
     }
-    async render() {
+    async* render() {
         if (!(this.renderer)) throw new Error("renderer not init")
         for await (let postContext of getPostFilesContext(this.context)) {
             postContext.content = await this.renderer.markdown.render(postContext, this.context)
@@ -43,11 +43,11 @@ class maxwell implements maxwellCore {
                 config: this.context.config,
                 postContext
             }
-            let result = await this.renderer.template.render({
+            let result = this.renderer.template.render({
                 filename: postContext.frontMatter.layout,
                 path: this.context.config.directory.template
             }, _context)
-            console.log(postContext.frontMatter, result)
+            yield result
         }
     }
 
