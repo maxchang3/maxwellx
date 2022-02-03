@@ -20,7 +20,7 @@ export class Renderer<T extends (withContent | withReading)> implements maxRende
         if (this.options) {
             let _data = (<renderFilepath>data)
             return (<withReading>this.callback)({
-                path: getFilePath([_data.path]),
+                path: getFilePath(_data.path),
                 filename: `${_data.filename}.${this.options.input}`
             }, context)
         } else {

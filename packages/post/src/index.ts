@@ -8,8 +8,8 @@ async function parseFrontMatter(content: string) {
 }
 
 
-async function readPostContext(folder: string[], filename: string) {
-    let content = await readFileContent(folder, filename)
+async function readPostContext(...folder: string[]) {
+    let content = await readFileContent(folder)
     const frontMatterReg = /---(.*?)---/sg
     let frontMatterText = frontMatterReg.exec(content)
     let frontMatter: frontMatter, postValue: string
@@ -34,7 +34,7 @@ async function* getPostFilesContent(context: context) {
     const basepath = [context.config.directory.source, "_posts"]
     const files = getFiles(basepath, '.md')
     for await (let file of files) {
-        yield readPostContext(basepath, file)
+        yield readPostContext(...basepath, file)
     }
 }
 
