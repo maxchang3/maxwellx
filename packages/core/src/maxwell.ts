@@ -1,7 +1,10 @@
-import { context, readConfig, defaultConfig, __dirname, getFilePath, readFileContent } from "@maxwellx/context";
-import type { Renderer, withContent, withReading } from "@maxwellx/api";
-import { getPostFilesContext } from "@maxwellx/post";
+import {
+    context, readConfig, getFilePath, readFileContent,
+    defaultConfig, __dirname
+} from "@maxwellx/context";
 
+import { getPostFilesContext } from "@maxwellx/post";
+import type { Renderer, withContent, withReading } from "@maxwellx/api";
 import type { maxwellCore } from './types'
 
 class maxwell implements maxwellCore {
@@ -25,7 +28,7 @@ class maxwell implements maxwellCore {
         let pkgJSON = JSON.parse(await readFileContent(["node_modules", pkg, "package.json"]))
         return getFilePath("node_modules", pkg, pkgJSON.main)
     }
-    async loadRenderer(){
+    async loadRenderer() {
         let [_template, _markdown] = await Promise.all([
             import(await this.getPluginPath(this.context.config.renderer.template)),
             import(await this.getPluginPath(this.context.config.renderer.markdown))
@@ -47,7 +50,7 @@ class maxwell implements maxwellCore {
                 filename: content.frontMatter.layout,
                 path: this.context.config.directory.template
             }, _context)
-            console.log(content.frontMatter,result)
+            console.log(content.frontMatter, result)
         }
     }
 
