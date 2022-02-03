@@ -1,6 +1,6 @@
 import { context, readConfig, defaultConfig, __dirname, getFilePath, readFileContent } from "@maxwellx/context";
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
-import { getPostFilesContent } from "@maxwellx/post";
+import { getPostFilesContext } from "@maxwellx/post";
 
 import type { maxwellCore } from './types'
 
@@ -34,7 +34,7 @@ class maxwell implements maxwellCore {
     }
     async render() {
         if (!(this.renderer)) throw new Error("renderer not init")
-        for await (let content of getPostFilesContent(this.context)) {
+        for await (let content of getPostFilesContext(this.context)) {
             content.content = await this.renderer.markdown.render(content, this.context)
             let _context: context = {
                 config: this.context.config,
@@ -44,7 +44,7 @@ class maxwell implements maxwellCore {
                 filename: content.frontMatter.layout,
                 path: this.context.config.directory.template
             }, _context)
-            console.log(result)
+            console.log(content.frontMatter,result)
         }
     }
 

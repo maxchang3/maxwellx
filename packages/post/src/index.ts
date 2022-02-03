@@ -20,7 +20,6 @@ async function readPostContext(...folder: string[]) {
         frontMatter = {}
         postValue = content
     }
-    // 对于从这个函数读取的文件，除非做特殊声明否则默认 layout 按 post 处理。
     if (!(frontMatter.layout)) frontMatter.layout = "post"
     let context: postContext = {
         frontMatter,
@@ -30,7 +29,7 @@ async function readPostContext(...folder: string[]) {
 }
 
 
-async function* getPostFilesContent(context: context) {
+async function* getPostFilesContext(context: context) {
     const basepath = [context.config.directory.source, "_posts"]
     const files = getFiles(basepath, '.md')
     for await (let file of files) {
@@ -38,4 +37,4 @@ async function* getPostFilesContent(context: context) {
     }
 }
 
-export { getPostFilesContent, readPostContext }
+export { getPostFilesContext, readPostContext }
