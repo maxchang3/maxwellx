@@ -1,4 +1,4 @@
-export { definePlugin } from './plugin.js'
+export { definePlugin, getPluginPath , loadPluginModule } from './plugin.js'
 
 export { Renderer } from './renderer/index.js'
 
