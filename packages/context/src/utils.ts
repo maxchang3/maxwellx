@@ -10,10 +10,11 @@ function getFilePath(...paths: string[]) {
     return path.join(__dirname, ...paths)
 }
 /**
- * 遍历指定目录下文件与目录，并判断是否为文件。
- * 实现为异步迭代生成器，先使用 map 生成所有 promise，再依次返回。
+ * Traverse files and dirs in the path, then judge if it is a file, then return it。
+ * It's an async generator, so you need to get it value by `for await……of `
+ * First we use `map` generator all `promise` object, then use `for of` and `yield` return it
  * @param paths 
- * @param fileExtension 文件后缀，需要带 `.` ，例如 `.md` 
+ * @param fileExtension need to with `.` , such as `.md` 
  */
 async function* getFiles(paths: string[],fileExtension?:string) {
     let files = await fs.readdir(getFilePath(...paths))
@@ -24,9 +25,9 @@ async function* getFiles(paths: string[],fileExtension?:string) {
     }
 }
 /**
- * 遍历指定目录下文件与目录，并判断是否为文件。
+ * Traverse files and dirs in the path, then judge if it is a file, then return it。
  * @param paths 
- * @param fileExtension 文件后缀，需要带 `.` ，例如 `.md` 
+ * @param fileExtension need to with `.` , such as `.md` 
  */
 async function getFilesOnce(paths:string[],fileExtension?:string){
     let files = await fs.readdir(getFilePath(...paths))
