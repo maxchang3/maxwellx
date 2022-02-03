@@ -3,7 +3,8 @@ interface frontMatter {
 }
 interface postContext {
     frontMatter: frontMatter
-    content: string
+    content: string,
+    filename: string
 }
 interface readFileOptions {
     encoding?: BufferEncoding,
