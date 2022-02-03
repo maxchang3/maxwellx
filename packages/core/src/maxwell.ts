@@ -1,8 +1,4 @@
-import {
-    context, readConfig, getFilePath, readFileContent,
-    defaultConfig, __dirname
-} from "@maxwellx/context";
-
+import {  context, readConfig, defaultConfig, __dirname } from "@maxwellx/context";
 import { getPostFilesContext } from "@maxwellx/post";
 import { loadPluginModule } from "@maxwellx/api"
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
