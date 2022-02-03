@@ -29,7 +29,7 @@ async function readConfig() :Promise<configure>{
     return getSafeConfig(config)
 }
 
-function returnConfig(config:configure):Partial<configure> {
+function returnConfig(config:Partial<configure>):Partial<configure> {
     return config
 }
 
