@@ -4,7 +4,7 @@ import type{ Renderer, withContent, withReading } from "@maxwellx/api";
 
 interface maxwellCore {
     context:context,
-    renderer: {
+    renderer?: {
         template: Renderer<withReading>,
         markdown: Renderer<withContent>
     },

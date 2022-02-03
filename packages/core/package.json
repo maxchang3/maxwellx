@@ -12,8 +12,6 @@
   "dependencies": {
     "@maxwellx/api": "workspace:^1.0.0",
     "@maxwellx/context": "workspace:^1.0.0",
-    "@maxwellx/post": "workspace:^1.0.0",
-    "@maxwellx/renderer-eta": "workspace:^1.0.0",
-    "@maxwellx/renderer-markdown-it": "workspace:^1.0.0"
+    "@maxwellx/post": "workspace:^1.0.0"
   }
 }
