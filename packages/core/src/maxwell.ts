@@ -14,12 +14,18 @@ class maxwell implements maxwellCore {
     constructor() {
         this.context = { config: defaultConfig };
     }
+    async init() {
+        await this.setConfig();
+        await this.loadRenderer();
+    }
+    async setConfig() {
+        this.context.config = await readConfig()
+    }
     async getPluginPath(pkg: string) {
         let pkgJSON = JSON.parse(await readFileContent(["node_modules", pkg, "package.json"]))
         return getFilePath("node_modules", pkg, pkgJSON.main)
     }
-    async init() {
-        await this.setConfig();
+    async loadRenderer(){
         let [_template, _markdown] = await Promise.all([
             import(await this.getPluginPath(this.context.config.renderer.template)),
             import(await this.getPluginPath(this.context.config.renderer.markdown))
@@ -28,9 +34,6 @@ class maxwell implements maxwellCore {
             template: _template.default,
             markdown: _markdown.default
         }
-    }
-    async setConfig() {
-        this.context.config = await readConfig()
     }
     async render() {
         if (!(this.renderer)) throw new Error("renderer not init")
