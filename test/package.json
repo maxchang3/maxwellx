@@ -5,8 +5,6 @@
   "type": "module",
   "main": "lib/index.js",
   "scripts": {
-    "test:renderer": "pnpm -C ../packages/renderer build && tsc && node lib/renderer.test.js",
-    "test:context": "pnpm -C ../packages/context build && tsc && node lib/context.test.js",
     "test:core": "pnpm build --filter \"@maxwellx/*\" &&  tsc && node lib/core.test.js"
   },
   "author": "MaxChang3",
