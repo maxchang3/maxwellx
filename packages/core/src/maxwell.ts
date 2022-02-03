@@ -15,13 +15,13 @@ class maxwell implements maxwellCore {
         this.context = { config: defaultConfig };
     }
     async init() {
-        await this.setConfig();
-        await this.loadRenderer();
+        await this.#setConfig();
+        await this.#loadRenderer();
     }
-    async setConfig() {
+    async #setConfig() {
         this.context.config = await readConfig()
     }
-    async loadRenderer() {
+    async #loadRenderer() {
         let [_template, _markdown] = await Promise.all([
             loadPluginModule(this.context.config.renderer.template),
             loadPluginModule(this.context.config.renderer.markdown)
