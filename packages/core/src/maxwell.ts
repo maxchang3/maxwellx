@@ -39,17 +39,14 @@ class maxwell implements maxwellCore {
                 config: this.context.config,
                 postContext
             }
-            // cause we add `postContext` in `_context` before
-            // so here we reassign its value the `_context` will update too. 
-            // But i don't think it's a good way to do that. :(
             postContext.content  = await this.renderer.template.render({
                 filename: postContext.frontMatter.layout,
                 path: this.context.config.directory.template
             }, _context)
-            yield _context
+            yield postContext
         }
     }
-    async* IO() {
+    async* write() {
 
     }
 }
