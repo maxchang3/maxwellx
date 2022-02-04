@@ -16,12 +16,12 @@ function getFilePath(...paths: string[]) {
  * @param paths 
  * @param fileExtension need to with `.` , such as `.md` 
  */
-async function* getFiles(paths: string[],fileExtension?:string) {
+async function* getFiles(paths: string[], fileExtension?: string) {
     let files = await fs.readdir(getFilePath(...paths))
     const fileStatPromise = files.map(file => fs.lstat(getFilePath(...paths, file)))
-    const fileExtBool = (index:number)=> fileExtension? path.extname(files[index])==fileExtension :true
+    const fileExtBool = (index: number) => fileExtension ? path.extname(files[index]) == fileExtension : true
     for (let [index, fileStat] of fileStatPromise.entries()) {
-        if ((await fileStat).isFile() && fileExtBool(index))  yield files[index]
+        if ((await fileStat).isFile() && fileExtBool(index)) yield files[index]
     }
 }
 /**
@@ -29,10 +29,10 @@ async function* getFiles(paths: string[],fileExtension?:string) {
  * @param paths 
  * @param fileExtension need to with `.` , such as `.md` 
  */
-async function getFilesOnce(paths:string[],fileExtension?:string){
+async function getFilesOnce(paths: string[], fileExtension?: string) {
     let files = await fs.readdir(getFilePath(...paths))
     const fileStatPromise = files.map(file => fs.lstat(getFilePath(...paths, file)))
-    const fileExtBool = (index:number)=> fileExtension? path.extname(files[index])==fileExtension :true
+    const fileExtBool = (index: number) => fileExtension ? path.extname(files[index]) == fileExtension : true
     const fileStat = await Promise.all(fileStatPromise)
     files = files.filter((_file, index) => fileStat[index].isFile() && fileExtBool(index))
     return files
@@ -43,4 +43,9 @@ async function readFileContent(paths: string[], options?: readFileOptions) {
     if (options?.escape) return fileContent// todo ;
     return fileContent
 }
-export { readFileContent, getFilePath, getFiles, getFilesOnce, configPath, __dirname, path }
+
+async function writeFile(paths: string[], content: string) {
+    return fs.writeFile(getFilePath(...paths), content)
+}
+
+export { readFileContent, getFilePath, getFiles, getFilesOnce, writeFile, configPath, __dirname, path }
