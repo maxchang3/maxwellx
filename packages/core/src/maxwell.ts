@@ -40,7 +40,7 @@ class maxwell implements maxwellCore {
                 postContext
             }
             // cause we add `postContext` in `_context` before
-            // here we reassign it's value the `_context` will update too. 
+            // so here we reassign its value the `_context` will update too. 
             // But i don't think it's a good way to do that. :(
             postContext.content  = await this.renderer.template.render({
                 filename: postContext.frontMatter.layout,
