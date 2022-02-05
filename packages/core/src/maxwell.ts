@@ -1,7 +1,8 @@
-import {  context, readConfig, defaultConfig, __dirname, postContext } from "@maxwellx/context";
-import { getPostFilesContext } from "@maxwellx/post";
+import { context, readConfig, writeFile, defaultConfig, __dirname } from "@maxwellx/context";
+import { getFilesContext } from "@maxwellx/post";
 import { loadPluginModule } from "@maxwellx/api"
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
+import type { layoutContext } from "@maxwellx/post"
 import type { maxwellCore } from './types'
 
 class maxwell implements maxwellCore {
@@ -33,22 +34,28 @@ class maxwell implements maxwellCore {
     }
     async* render() {
         if (!(this.renderer)) throw new Error("renderer not init")
-        for await (let postContext of getPostFilesContext(this.context)) {
-            postContext.content = await this.renderer.markdown.render(postContext, this.context)
+        for await (let layoutContext of getFilesContext(this.context)) {
+            layoutContext.content = await this.renderer.markdown.render(layoutContext, this.context)
             let _context: context = {
                 config: this.context.config,
-                postContext
+                layoutContext
             }
-            postContext.content  = await this.renderer.template.render({
-                filename: postContext.frontMatter.layout,
+            layoutContext.content = await this.renderer.template.render({
+                filename: `${layoutContext.frontMatter.layout}`,
                 path: this.context.config.directory.template
             }, _context)
-            yield postContext
+            layoutContext.filename = `${layoutContext.filename}.${this.renderer.template.options?.output}`
+            yield layoutContext
         }
     }
-    async write(postGenerator:AsyncGenerator<postContext, void, unknown>) {
-        for await(let postContext of postGenerator){
-            
+    async write(postGenerator: AsyncGenerator<layoutContext, void, unknown>) {
+        for await (let layoutContext of postGenerator) {
+            let basepath = [
+                this.context.config.directory.public,
+                layoutContext.frontMatter.layout,
+                layoutContext.filename
+            ]
+            writeFile(basepath, layoutContext.content)
         }
     }
 }
