@@ -3,10 +3,7 @@ import { maxwell } from "@maxwellx/core";
 const core = new maxwell();
 await core.init();
 let renderList = core.render()
-for await(let result of renderList){
-    console.log(result)
-}
-
+core.write(renderList)
 // for await(let content of getPostFilesContent(core.context)){
 //     console.log(content)
 // }
