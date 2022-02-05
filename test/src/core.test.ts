@@ -1,5 +1,5 @@
 import { maxwell } from "@maxwellx/core";
-// import { getPostFilesContent } from "@maxwellx/post";
+// import { getPostFilesContent } from "@maxwellx/layout";
 const core = new maxwell();
 await core.init();
 let renderList = core.render()

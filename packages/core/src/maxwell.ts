@@ -1,8 +1,8 @@
 import { context, readConfig, writeFile, defaultConfig, __dirname } from "@maxwellx/context";
-import { getFilesContext } from "@maxwellx/post";
+import { getFilesContext } from "@maxwellx/layout";
 import { loadPluginModule } from "@maxwellx/api"
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
-import type { layoutContext } from "@maxwellx/post"
+import type { layoutContext } from "@maxwellx/layout"
 import type { maxwellCore } from './types'
 
 class maxwell implements maxwellCore {
