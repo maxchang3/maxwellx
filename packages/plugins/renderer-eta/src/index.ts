@@ -4,7 +4,8 @@ import { renderFile, configure } from "eta"
 
 const etaRenderer = new Renderer<withReading>(async (data, context, options) => {
     configure({
-        views: data.path
+        views: data.path,
+        cache: true
     })
     return renderFile(data.filename, context, { autoEscape: false }) as Promise<string>;
 }, {
