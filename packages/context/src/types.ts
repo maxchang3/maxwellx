@@ -1,11 +1,3 @@
-interface frontMatter {
-    [key: string]: any
-}
-interface postContext {
-    frontMatter: frontMatter
-    content: string,
-    filename: string
-}
 interface readFileOptions {
     encoding?: BufferEncoding,
     escape?: boolean
@@ -50,8 +42,8 @@ interface configure {
 }
 interface context {
     config: configure,
-    postContext?: postContext
+    [key: string]: any
 }
 
 
-export { readFileOptions, configure, context ,postContext,frontMatter}
+export { readFileOptions, configure, context }
