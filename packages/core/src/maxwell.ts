@@ -1,4 +1,4 @@
-import {  context, readConfig, defaultConfig, __dirname } from "@maxwellx/context";
+import {  context, readConfig, defaultConfig, __dirname, postContext } from "@maxwellx/context";
 import { getPostFilesContext } from "@maxwellx/post";
 import { loadPluginModule } from "@maxwellx/api"
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
@@ -46,8 +46,10 @@ class maxwell implements maxwellCore {
             yield postContext
         }
     }
-    async* write() {
-
+    async write(postGenerator:AsyncGenerator<postContext, void, unknown>) {
+        for await(let postContext of postGenerator){
+            
+        }
     }
 }
 
