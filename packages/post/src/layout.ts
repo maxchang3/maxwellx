@@ -39,7 +39,6 @@ async function* getFilesContext(context: context) {
     const basepath = context.config.directory.source
     const layouts = (await getDirs([basepath]))
     let layoutFiles: layoutFiles = {}
-    console.log(layouts)
     for(let layout of layouts){
         layoutFiles[layout] = (await getFiles([basepath,layout],".md"))
     }
