@@ -63,7 +63,6 @@ class maxwell implements maxwellCore {
             }
             layoutContext.filename = layoutRouter.format()
             layoutContext.filename += this.renderer.template.options?.output
-            //<Router Plugin> todo2
             let basepath = [
                 this.context.config.directory.public,
                 ...layoutContext.filename.split(sep)
