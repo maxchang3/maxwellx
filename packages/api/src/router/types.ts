@@ -1,5 +1,9 @@
-interface Router {
-    rule: string
+interface slugValues {
+    [key: string]:  string 
 }
 
-export { Router }
+interface routerKeywords {
+    [key: string]:  string
+}
+
+export { routerKeywords, slugValues }
