@@ -9,7 +9,16 @@ const defaultConfig:configure = {
     url: {
         url: "",
         root: "/",
-        permalink: ":year/:month/:day/:title/"
+        router: {
+            "post": {
+                rule: ":year/:month/:day/:filename",
+                withIndex: true
+            },
+            "*": {
+                rule: ":layout/:filename",
+                withIndex: true
+            }
+        }
     },
     directory: {
         source: "source",
@@ -41,7 +50,10 @@ function getSafeConfig(config:Partial<configure>):configure{
     config.url ??= defaultConfig.url
     config.url.url ??= defaultConfig.url.url
     config.url.root ??= defaultConfig.url.root
-    config.url.permalink ??= defaultConfig.url.permalink
+
+    config.url.router ??= defaultConfig.url.router
+    config.url.router.post ??= defaultConfig.url.router.post
+    config.url.router["*"] ??= defaultConfig.url.router["*"]
 
     config.directory  ??= defaultConfig.directory
     config.directory.source ??= defaultConfig.directory.source
