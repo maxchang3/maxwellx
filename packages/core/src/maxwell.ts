@@ -1,9 +1,10 @@
 import { context, readConfig, writeFile, defaultConfig, __dirname } from "@maxwellx/context";
 import { getFilesContext } from "@maxwellx/layout";
-import { loadPluginModule } from "@maxwellx/api"
+import { loadPluginModule, Router } from "@maxwellx/api"
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
 import type { layoutContext } from "@maxwellx/layout"
 import type { maxwellCore } from './types'
+import { sep } from "path";
 
 class maxwell implements maxwellCore {
     context: context;
@@ -47,18 +48,25 @@ class maxwell implements maxwellCore {
                 filename: `${layoutContext.frontMatter.layout}`,
                 path: this.context.config.directory.template //<Router Plugin> todo1
             }, _context)
-             //<Filter Plugin> todo4: after_layout_render
-            layoutContext.filename = `${layoutContext.filename}.${this.renderer.template.options?.output}`
+            //<Filter Plugin> todo4: after_layout_render
             yield layoutContext
         }
     }
     async write(postGenerator: AsyncGenerator<layoutContext, void, unknown>) {
+        if (!(this.renderer)) throw new Error("renderer not init")
         for await (let layoutContext of postGenerator) {
+            let layoutRouter
+            if (layoutContext.frontMatter.layout === "post") {
+                layoutRouter = new Router(this.context.config.url.permalink, layoutContext,true);
+            } else {
+                layoutRouter = new Router(":layout/:filename", layoutContext);
+            }
+            layoutContext.filename = layoutRouter.format() 
+            layoutContext.filename += this.renderer.template.options?.output
             //<Router Plugin> todo2
             let basepath = [
                 this.context.config.directory.public,
-                layoutContext.frontMatter.layout,
-                layoutContext.filename
+                ...layoutContext.filename.split(sep)
             ]
             writeFile(basepath, layoutContext.content)
         }
