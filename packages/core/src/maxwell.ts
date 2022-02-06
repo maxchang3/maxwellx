@@ -57,11 +57,11 @@ class maxwell implements maxwellCore {
         for await (let layoutContext of postGenerator) {
             let layoutRouter
             if (layoutContext.frontMatter.layout === "post") {
-                layoutRouter = new Router(this.context.config.url.permalink, layoutContext,true);
+                layoutRouter = new Router(this.context.config.url.router.post.rule, layoutContext, this.context.config.url.router.post.withIndex);
             } else {
-                layoutRouter = new Router(":layout/:filename", layoutContext);
+                layoutRouter = new Router(this.context.config.url.router["*"].rule, layoutContext, this.context.config.url.router["*"].withIndex);
             }
-            layoutContext.filename = layoutRouter.format() 
+            layoutContext.filename = layoutRouter.format()
             layoutContext.filename += this.renderer.template.options?.output
             //<Router Plugin> todo2
             let basepath = [
