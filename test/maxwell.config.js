@@ -8,7 +8,7 @@ export default returnConfig({
     url: {
         url: "http://zhangmaimai.com",
         root: "/",
-        permalink: ":year/:month/:day/:title/"
+        permalink: ":year/:month/:day/:filename"
     },
     directory: {
         source: "source",
