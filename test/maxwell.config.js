@@ -8,7 +8,16 @@ export default returnConfig({
     url: {
         url: "http://zhangmaimai.com",
         root: "/",
-        permalink: ":year/:month/:day/:filename"
+        router: {
+            "post": {
+                rule: ":year/:month/:day/:filename",
+                withIndex: true
+            },
+            "*": {
+                rule: ":layout/:filename",
+                withIndex: false
+            }
+        }
     },
     directory: {
         source: "source",

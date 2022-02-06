@@ -16,8 +16,31 @@ interface configure {
         url: string,
         /** site root path, if your site in a subdirectory such as `/blog/` just set it to `blog`   */
         root: string,
-        /** site url route link for more information: https://todo.co/ */
-        permalink: string
+        /** site url route link  */
+        router: {
+            /**  the rule of the `layout` you want to define. `*` means for all layout */
+            [key: string]: {
+                /** url route rule for `layout`
+                  * slug list :
+                  * 
+                  * `:year` `:month` `:day`  the times in markdown frontmatter
+                  * 
+                  * `:title`  the title in markdown frontmatter
+                  * 
+                  * `:filename`  the filename of the markdown file
+                  * 
+                  * You can use <constant> to pass in a constant,
+                  * e.g. `<post>` will eventually be rendered as `post`
+                  * 
+                */
+                rule: string,
+                /** when this option set to `true` generate an index.html finally, 
+                 * in this way, your route name will be the folder name 
+                 * otherwise, your route name will be the filename name 
+                 * */
+                withIndex: boolean
+            }
+        }
     },
     /** site directory */
     directory: {
