@@ -38,16 +38,14 @@ async function getPageContext(...folder: string[]) {
 async function getFilesContext(context: context) {
     const basepath = context.config.directory.source
     const layouts = (await getDirs([basepath]))
-    let layoutFiles = await forPromiseAll(
-        layouts,
-        (layout) => getFiles([basepath, layout], ".md"),
-        true
-    ) as { [key: string]: string[] }
-    let filesContext: filesContext = []; 
+    let layoutFiles = await forPromiseAll(layouts,
+        (layout) => getFiles([basepath, layout], ".md"), true
+    ) as { [key: string]: string[] };
+    let filesContext: filesContext = [];
     for (let layout in layoutFiles) {
         let files = layoutFiles[layout]
-        filesContext.push(...(await forPromiseAll(files, 
-            (file) => getPageContext(basepath, layout, file), 
+        filesContext.push(...(await forPromiseAll(files,
+            (file) => getPageContext(basepath, layout, file),
             false
         ) as pageContext[]))
     }
