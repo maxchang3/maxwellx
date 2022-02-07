@@ -42,4 +42,15 @@ async function writeFile(paths: string[], content: string) {
     return fs.writeFile(getFilePath(...paths), content)
 }
 
-export { readFileContent, getFilePath, getFiles,  getDirs, writeFile, configPath, __dirname, path }
+/**
+ * Traverse the given keyList, and pass each key into the given promise function
+ * then Promise.all() the promise list and get the whole value once
+ */
+ async function forPromiseAll<T>(keyList: string[], promiseFunc: (key: string) => Promise<T>) {
+    let _result: { [key: string]: T } = {}
+    let _promiseList = keyList.map(key => promiseFunc(key));
+    (await Promise.all(_promiseList)).forEach((value, index) => _result[keyList[index]] = value)
+    return _result
+}
+
+export { readFileContent, getFilePath, getFiles,  getDirs, writeFile, forPromiseAll , configPath, __dirname, path }
