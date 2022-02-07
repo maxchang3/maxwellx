@@ -28,7 +28,8 @@ const defaultConfig:configure = {
     template: "default",
     plugins: [
         "@maxwellx/renderer-eta",
-        "@maxwellx/renderer-markdown-it"
+        "@maxwellx/renderer-markdown-it",
+        "@maxwellx/generator-basic"
     ]
 }
 
