@@ -1,4 +1,4 @@
-import { context, readConfig, writeFile, promiseAllObject, defaultConfig, __dirname } from "@maxwellx/context";
+import { context, readConfig, writeFile, defaultConfig, __dirname } from "@maxwellx/context";
 import { getFilesContext } from "@maxwellx/layout";
 import { loadPluginModule } from "@maxwellx/api"
 import { Router } from "@maxwellx/router"

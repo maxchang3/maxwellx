@@ -47,20 +47,17 @@ async function writeFile(paths: string[], content: string) {
  * then Promise.all() the promise list and get the whole value once
  */
 async function forPromiseAll<T>(keyList: string[], promiseFunc: (key: string) => Promise<T>,withKey?:boolean) {
-    let _result: { [key: string]: T } = {}
     let _promiseList = keyList.map(key => promiseFunc(key));
     let values = (await Promise.all(_promiseList))
     if(!(withKey)) return values
+    let _result: { [key: string]: T } = {}
     values.forEach((value, index) => _result[keyList[index]] = value)
     return _result
 }
 
-async function promiseAllObject<T>(obj: T, callback: (value: string) => Promise<void>) {
-    return Promise.all(Object.keys(obj).map(async (objValue) => callback(objValue)))
-}
 
 export {
     readFileContent, getFilePath, getFiles,
-    getDirs, writeFile, forPromiseAll, promiseAllObject,
+    getDirs, writeFile, forPromiseAll, 
     configPath, __dirname, path
 }
