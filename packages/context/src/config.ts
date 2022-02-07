@@ -25,12 +25,11 @@ const defaultConfig:configure = {
         public: "public",
         template: "template"
     },
-    renderer:{
-        template:"@maxwellx/renderer-eta",
-        markdown:"@maxwellx/renderer-markdown-it"
-    },
     template: "default",
-    plugins: []
+    plugins: [
+        "@maxwellx/renderer-eta",
+        "@maxwellx/renderer-markdown-it"
+    ]
 }
 
 async function readConfig() :Promise<configure>{
@@ -62,11 +61,6 @@ function getSafeConfig(config:Partial<configure>):configure{
 
     config.template ??= defaultConfig.template
     config.plugins ??= defaultConfig.plugins
-
-    config.renderer ??= defaultConfig.renderer
-
-    config.renderer.markdown ??= defaultConfig.renderer.markdown
-    config.renderer.template ??= defaultConfig.renderer.template
 
     return config as configure
 }

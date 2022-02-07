@@ -51,13 +51,6 @@ interface configure {
         /** template dir */
         template: string
     },
-    /** engine to render your source file */
-    renderer: {
-        /** template renderer */
-        template: string,
-        /** markdown renderer */
-        markdown: string
-    },
     /** template name */
     template: string,
     /** plugins */
