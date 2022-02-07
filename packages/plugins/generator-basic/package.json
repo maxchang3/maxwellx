@@ -1,0 +1,19 @@
+{
+  "name": "@maxwellx/generator-basic",
+  "version": "1.0.0",
+  "description": "",
+  "author": "MaxChang3",
+  "main": "lib/index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "tsc"
+  },
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "@maxwellx/api": "workspace:^1.0.0",
+    "@maxwellx/layout": "workspace:^1.0.0"
+  }
+}
