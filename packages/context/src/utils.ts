@@ -23,11 +23,11 @@ async function getFiles(paths: string[], fileExtension?: string) {
     return files
 }
 
-async function getDirs(paths:string[]) {
+async function getDirs(paths: string[]) {
     let dirs = await fs.readdir(getFilePath(...paths))
     const fileStatPromise = dirs.map(dir => fs.lstat(getFilePath(...paths, dir)))
     const fileStat = await Promise.all(fileStatPromise)
-    dirs = dirs.filter((_file, index) => fileStat[index].isDirectory() )
+    dirs = dirs.filter((_file, index) => fileStat[index].isDirectory())
     return dirs
 }
 
@@ -38,7 +38,7 @@ async function readFileContent(paths: string[], options?: readFileOptions) {
 }
 
 async function writeFile(paths: string[], content: string) {
-    await fs.mkdir(getFilePath(...paths.slice(0,-1)),{recursive: true})
+    await fs.mkdir(getFilePath(...paths.slice(0, -1)), { recursive: true })
     return fs.writeFile(getFilePath(...paths), content)
 }
 
@@ -46,11 +46,19 @@ async function writeFile(paths: string[], content: string) {
  * Traverse the given keyList, and pass each key into the given promise function
  * then Promise.all() the promise list and get the whole value once
  */
- async function forPromiseAll<T>(keyList: string[], promiseFunc: (key: string) => Promise<T>) {
+async function forPromiseAll<T>(keyList: string[], promiseFunc: (key: string) => Promise<T>) {
     let _result: { [key: string]: T } = {}
     let _promiseList = keyList.map(key => promiseFunc(key));
     (await Promise.all(_promiseList)).forEach((value, index) => _result[keyList[index]] = value)
     return _result
 }
 
-export { readFileContent, getFilePath, getFiles,  getDirs, writeFile, forPromiseAll , configPath, __dirname, path }
+async function promiseAllObject<T>(obj: T, callback: (value: string) => Promise<void>) {
+    return Promise.all(Object.keys(obj).map(async (objValue) => callback(objValue)))
+}
+
+export {
+    readFileContent, getFilePath, getFiles,
+    getDirs, writeFile, forPromiseAll, promiseAllObject,
+    configPath, __dirname, path
+}
