@@ -34,18 +34,25 @@ async function getLayoutContext(...folder: string[]) {
     }
     return context
 }
+/**
+ * Traverse the given keyList, and pass each key into the given promise function
+ * then Promise.all() the promise list and get the whole value once
+ */
+async function _forPromiseAll<T>(keyList: string[], promiseFunc: (key: string) => Promise<T>) {
+    let _result: { [key: string]: T } = {}
+    let _promiseList = keyList.map(key => promiseFunc(key));
+    (await Promise.all(_promiseList)).forEach((value, index) => _result[keyList[index]] = value)
+    return _result
+}
 
 async function* getFilesContext(context: context) {
     const basepath = context.config.directory.source
     const layouts = (await getDirs([basepath]))
-    let layoutFiles: layoutFiles = {}
-    for(let layout of layouts){
-        layoutFiles[layout] = (await getFiles([basepath,layout],".md"))
-    }
-    for(let layout in layoutFiles){
+    let layoutFiles = await _forPromiseAll(layouts, (layout) => getFiles([basepath, layout], ".md"))
+    for (let layout in layoutFiles) {
         let files = layoutFiles[layout]
-        for(let file of files){
-            yield getLayoutContext(basepath,layout,file)
+        for (let file of files) {
+            yield getLayoutContext(basepath, layout, file)
         }
     }
 }
