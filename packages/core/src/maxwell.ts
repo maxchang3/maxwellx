@@ -69,11 +69,8 @@ class maxwell implements maxwellCore {
     async #initGenerator() {
         this.filesContext = this.filesContext.concat(
             await Promise.all(this.plugins.maxGenerator.map(
-                async (generator: maxGenerator) =>{
-                    let a = await generator.generate(this.context, this.filesContext)
-                    console.log(a)
-                    return a
-                }
+                async (generator: maxGenerator) => 
+                    await generator.generate(this.context, this.filesContext)
             )))
     }
     async render() {
@@ -81,7 +78,7 @@ class maxwell implements maxwellCore {
         const { markdown, template } = this.renderer
         await Promise.all(this.filesContext.map(async (pageContext) => {
             //<Filter Plugin> todo:1 before_content_render
-            if(pageContext.content!=""){
+            if (pageContext.content != "") {
                 pageContext.content = await markdown.render(pageContext, this.context)
             }
             //<Filter Plugin> todo:2 after_content_render
