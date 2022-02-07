@@ -4,15 +4,15 @@ interface frontMatter {
 interface layoutFiles {
     [key: string]: string[]
 }
-interface layoutContext {
+interface pageContext {
     frontMatter: frontMatter
     content: string,
     filename: string
 }
 interface filesContext {
     [layout: string]: {
-        [filename: string]: layoutContext
+        [filename: string]: pageContext
     }
 }
 
-export { frontMatter, layoutContext, layoutFiles , filesContext }
+export { frontMatter, pageContext, layoutFiles , filesContext }

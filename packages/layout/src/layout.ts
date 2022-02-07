@@ -1,6 +1,6 @@
 import { readFileContent, getFiles, getDirs , forPromiseAll} from "@maxwellx/context"
 import type { context } from "@maxwellx/context"
-import type { frontMatter, layoutContext, filesContext } from "./types"
+import type { frontMatter, pageContext, filesContext } from "./types"
 import yaml from "js-yaml";
 
 function formatFileName(folder: string[]) {
@@ -13,7 +13,7 @@ async function parseFrontMatter(content: string) {
     return frontMatter
 }
 
-async function getLayoutContext(...folder: string[]) {
+async function getPageContext(...folder: string[]) {
     let content = await readFileContent(folder)
     const frontMatterReg = /---(.*?)---/sg
     let frontMatterText = frontMatterReg.exec(content)
@@ -27,7 +27,7 @@ async function getLayoutContext(...folder: string[]) {
     }
     if (!(frontMatter.layout)) frontMatter.layout = folder.at(-2)
     let filename = formatFileName(folder)
-    let context: layoutContext = {
+    let context: pageContext = {
         frontMatter,
         content: layoutContent,
         filename
@@ -42,7 +42,7 @@ async function getFilesContext(context: context) {
     let filesContext: filesContext = {}
     for (let layout in layoutFiles) {
         let files = layoutFiles[layout]
-        filesContext[layout] = (await forPromiseAll(files, (file) => getLayoutContext(basepath, layout, file)))
+        filesContext[layout] = (await forPromiseAll(files, (file) => getPageContext(basepath, layout, file)))
     }
     return filesContext
 }

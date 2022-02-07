@@ -39,17 +39,17 @@ class maxwell implements maxwellCore {
         let filesContext = await getFilesContext(this.context)
         await promiseAllObject(filesContext, async (layout) => {
             promiseAllObject(filesContext[layout], async (file) => {
-                let layoutContext = filesContext[layout][file]
+                let pageContext = filesContext[layout][file]
                 //<Filter Plugin> todo:1 before_content_render
-                layoutContext.content = await markdown.render(layoutContext, this.context)
+                pageContext.content = await markdown.render(pageContext, this.context)
                 //<Filter Plugin> todo:2 after_content_render
                 let _context: context = {
                     config: this.context.config,
-                    layoutContext
+                    pageContext
                 }
                 //<Filter Plugin> todo3: before_layout_render
-                layoutContext.content = await template.render({
-                    filename: `${layoutContext.frontMatter.layout}`,
+                pageContext.content = await template.render({
+                    filename: `${pageContext.frontMatter.layout}`,
                     path: this.context.config.directory.template //<Router Plugin> todo1
                 }, _context)
                 //<Filter Plugin> todo4: after_layout_render
@@ -63,25 +63,25 @@ class maxwell implements maxwellCore {
         await promiseAllObject(filesContext, async (layout) => {
             promiseAllObject(filesContext[layout], async (file) => {
                 let layoutRouter
-                let layoutContext = filesContext[layout][file]
-                if (layoutContext.frontMatter.layout === "post") {
+                let pageContext = filesContext[layout][file]
+                if (pageContext.frontMatter.layout === "post") {
                     layoutRouter = new Router(
                         this.context.config.url.router.post.rule,
-                        layoutContext,
+                        pageContext,
                         this.context.config.url.router.post.withIndex);
                 } else {
                     layoutRouter = new Router(
                         this.context.config.url.router["*"].rule,
-                        layoutContext,
+                        pageContext,
                         this.context.config.url.router["*"].withIndex);
                 }
-                layoutContext.filename = layoutRouter.format()
-                layoutContext.filename += template.options?.output
+                pageContext.filename = layoutRouter.format()
+                pageContext.filename += template.options?.output
                 let basepath = [
                     this.context.config.directory.public,
-                    ...layoutContext.filename.split(sep)
+                    ...pageContext.filename.split(sep)
                 ]
-                writeFile(basepath, layoutContext.content)
+                writeFile(basepath, pageContext.content)
             })
         })
 

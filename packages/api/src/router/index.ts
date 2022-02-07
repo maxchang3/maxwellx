@@ -1,18 +1,31 @@
 import dayjs from "dayjs";
 import { sep } from "path"
-import type { routerKeywords, slugValues } from "./types";
-import type { layoutContext } from "@maxwellx/layout"
+import type { routerFunc, routerKeywords, slugValues } from "./types";
+import type { pageContext } from "@maxwellx/layout"
+import type { context } from "@maxwellx/context";
 
+class RouterPlugin {
+    layout: string;
+    #routerFunc: routerFunc;
+    constructor(layout: string, routerFunc: routerFunc) {
+        this.layout = layout
+        this.#routerFunc = routerFunc
+    }
+    getRouter(context: context) {
+        let routerData = this.#routerFunc(context)
+        return new Router(routerData.router.rule, context.pageContext, routerData.router.withIndex)
+    }
+}
 export class Router {
     #rule: string;
-    #layoutContext: layoutContext;
+    #pageContext: pageContext;
     #routerKeywords: slugValues;
     #withIndex: boolean;
     #staticKeywords: string[] = [":year", ":month", ":day"]
 
-    constructor(rule: string, layoutContext: layoutContext, withIndex: boolean = false) {
+    constructor(rule: string, pageContext: pageContext, withIndex: boolean = false) {
         this.#rule = rule
-        this.#layoutContext = layoutContext
+        this.#pageContext = pageContext
         this.#routerKeywords = this.#getRouterKeywords()
         this.#parseRouter()
         this.#withIndex = withIndex
@@ -22,9 +35,9 @@ export class Router {
         ":year": "YYYY",
         ":month": "MM",
         ":day": "DD",
-        ":filename": this.#layoutContext.filename,
-        ":title": this.#layoutContext.frontMatter.title,
-        ":layout": this.#layoutContext.frontMatter.layout
+        ":filename": this.#pageContext.filename,
+        ":title": this.#pageContext.frontMatter.title,
+        ":layout": this.#pageContext.frontMatter.layout
     })
 
     #parseRouter() {
@@ -41,9 +54,9 @@ export class Router {
     }
 
     format() {
-        let dayjsRules = this.#rule.split(/<[^>]*>/g).filter(rule=>rule!='')
-        dayjsRules = dayjsRules.map(i => i != "" ? dayjs(this.#layoutContext.frontMatter.date).format(i) : "")
-        let buildInRules = (this.#rule.match(/<[^>]*>/g) || []).filter(rule=>rule!='')
+        let dayjsRules = this.#rule.split(/<[^>]*>/g).filter(rule => rule != '')
+        dayjsRules = dayjsRules.map(i => i != "" ? dayjs(this.#pageContext.frontMatter.date).format(i) : "")
+        let buildInRules = (this.#rule.match(/<[^>]*>/g) || []).filter(rule => rule != '')
         buildInRules = buildInRules.map(rule => rule.replaceAll("<", "").replaceAll(">", ""))
         let firstRules: string[], secondRules: string[]
         if (/<[^>]*>/.exec(this.#rule)?.index != 0) {
