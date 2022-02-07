@@ -1,4 +1,4 @@
-import { readFileContent, getFiles, getDirs , forPromiseAll} from "@maxwellx/context"
+import { readFileContent, getFiles, getDirs, forPromiseAll } from "@maxwellx/context"
 import type { context } from "@maxwellx/context"
 import type { frontMatter, pageContext, filesContext } from "./types"
 import yaml from "js-yaml";
@@ -38,11 +38,18 @@ async function getPageContext(...folder: string[]) {
 async function getFilesContext(context: context) {
     const basepath = context.config.directory.source
     const layouts = (await getDirs([basepath]))
-    let layoutFiles = await forPromiseAll(layouts, (layout) => getFiles([basepath, layout], ".md"))
-    let filesContext: filesContext = {}
+    let layoutFiles = await forPromiseAll(
+        layouts,
+        (layout) => getFiles([basepath, layout], ".md"),
+        true
+    ) as { [key: string]: string[] }
+    let filesContext: filesContext = []; 
     for (let layout in layoutFiles) {
         let files = layoutFiles[layout]
-        filesContext[layout] = (await forPromiseAll(files, (file) => getPageContext(basepath, layout, file)))
+        filesContext.push(...(await forPromiseAll(files, 
+            (file) => getPageContext(basepath, layout, file), 
+            false
+        ) as pageContext[]))
     }
     return filesContext
 }

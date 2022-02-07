@@ -9,10 +9,6 @@ interface pageContext {
     content: string,
     filename: string
 }
-interface filesContext {
-    [layout: string]: {
-        [filename: string]: pageContext
-    }
-}
+type filesContext = pageContext[]
 
 export { frontMatter, pageContext, layoutFiles , filesContext }

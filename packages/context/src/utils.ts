@@ -46,10 +46,12 @@ async function writeFile(paths: string[], content: string) {
  * Traverse the given keyList, and pass each key into the given promise function
  * then Promise.all() the promise list and get the whole value once
  */
-async function forPromiseAll<T>(keyList: string[], promiseFunc: (key: string) => Promise<T>) {
+async function forPromiseAll<T>(keyList: string[], promiseFunc: (key: string) => Promise<T>,withKey?:boolean) {
     let _result: { [key: string]: T } = {}
     let _promiseList = keyList.map(key => promiseFunc(key));
-    (await Promise.all(_promiseList)).forEach((value, index) => _result[keyList[index]] = value)
+    let values = (await Promise.all(_promiseList))
+    if(!(withKey)) return values
+    values.forEach((value, index) => _result[keyList[index]] = value)
     return _result
 }
 

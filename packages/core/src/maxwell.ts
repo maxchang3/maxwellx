@@ -17,7 +17,7 @@ class maxwell implements maxwellCore {
     plugins: any;
     constructor() {
         this.context = { config: defaultConfig };
-        this.filesContext = {}
+        this.filesContext = []
     }
     async init() {
         await this.#setConfig();
@@ -44,14 +44,12 @@ class maxwell implements maxwellCore {
     async #getRouter() {
         if (!(this.renderer)) throw new Error("renderer not init")
         const { template } = this.renderer
-        await this.#promiseAllObjSquare(this.filesContext, async (layout, file) => {
-            let layoutRouter
-            let pageContext = this.filesContext[layout][file]
+        this.filesContext.forEach(pageContext=>{
             let _layout = pageContext.frontMatter.layout
             if (!(Object.keys(this.context.config.url.router).includes(_layout))) {
                 _layout = "*"
             }
-            layoutRouter = new Router(
+            let layoutRouter = new Router(
                 this.context.config.url.router[_layout].rule,
                 pageContext,
                 this.context.config.url.router[_layout].withIndex
@@ -61,16 +59,11 @@ class maxwell implements maxwellCore {
         })
         return this.filesContext
     }
-    async #promiseAllObjSquare(filesContext: filesContext, callback: (layout: string, file: string) => Promise<void>) {
-        return promiseAllObject(filesContext, async (layout) => {
-            promiseAllObject(filesContext[layout], (file) => callback(layout, file))
-        })
-    }
+
     async render() {
         if (!(this.renderer)) throw new Error("renderer not init")
         const { markdown, template } = this.renderer
-        await this.#promiseAllObjSquare(this.filesContext, async (layout, file) => {
-            let pageContext = this.filesContext[layout][file]
+        await Promise.all(this.filesContext.map(async(pageContext)=>{
             //<Filter Plugin> todo:1 before_content_render
             pageContext.content = await markdown.render(pageContext, this.context)
             //<Filter Plugin> todo:2 after_content_render
@@ -84,11 +77,10 @@ class maxwell implements maxwellCore {
                 path: this.context.config.directory.template
             }, _context)
             //<Filter Plugin> todo4: after_layout_render
-        })
+        }))
     }
     async write() {
-        await this.#promiseAllObjSquare(this.filesContext, async (layout, file) => {
-            let pageContext = this.filesContext[layout][file]
+        await Promise.all(this.filesContext.map(async(pageContext)=>{
             let _layout = pageContext.frontMatter.layout
             if (!(Object.keys(this.context.config.url.router).includes(_layout))) {
                 _layout = "*"
@@ -98,7 +90,7 @@ class maxwell implements maxwellCore {
                 ...pageContext.filename.split(sep)
             ]
             writeFile(basepath, pageContext.content)
-        })
+        }))
     }
 }
 
