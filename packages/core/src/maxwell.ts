@@ -1,6 +1,7 @@
 import { context, readConfig, writeFile, promiseAllObject, defaultConfig, __dirname } from "@maxwellx/context";
 import { getFilesContext } from "@maxwellx/layout";
-import { loadPluginModule, Router } from "@maxwellx/api"
+import { loadPluginModule } from "@maxwellx/api"
+import {  Router } from "@maxwellx/router"
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
 import type { filesContext } from "@maxwellx/layout"
 import type { maxwellCore } from './types'

@@ -1,21 +1,8 @@
 import dayjs from "dayjs";
 import { sep } from "path"
-import type { routerFunc, routerKeywords, slugValues } from "./types";
+import type { routerKeywords, slugValues } from "./types";
 import type { pageContext } from "@maxwellx/layout"
-import type { context } from "@maxwellx/context";
 
-class RouterPlugin {
-    layout: string;
-    #routerFunc: routerFunc;
-    constructor(layout: string, routerFunc: routerFunc) {
-        this.layout = layout
-        this.#routerFunc = routerFunc
-    }
-    getRouter(context: context) {
-        let routerData = this.#routerFunc(context)
-        return new Router(routerData.router.rule, context.pageContext, routerData.router.withIndex)
-    }
-}
 export class Router {
     #rule: string;
     #pageContext: pageContext;

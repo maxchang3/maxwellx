@@ -15,12 +15,8 @@ importers:
   packages/api:
     specifiers:
       '@maxwellx/context': workspace:^1.0.0
-      '@maxwellx/layout': workspace:^1.0.0
-      dayjs: ^1.10.7
     dependencies:
       '@maxwellx/context': link:../context
-      '@maxwellx/layout': link:../layout
-      dayjs: registry.npmmirror.com/dayjs/1.10.7
 
   packages/context:
     specifiers: {}
@@ -30,10 +26,23 @@ importers:
       '@maxwellx/api': workspace:^1.0.0
       '@maxwellx/context': workspace:^1.0.0
       '@maxwellx/layout': workspace:^1.0.0
+      '@maxwellx/router': workspace:^1.0.0
     dependencies:
       '@maxwellx/api': link:../api
       '@maxwellx/context': link:../context
       '@maxwellx/layout': link:../layout
+      '@maxwellx/router': link:../router
+
+  packages/layout:
+    specifiers:
+      '@maxwellx/context': workspace:^1.0.0
+      '@types/js-yaml': ^4.0.5
+      js-yaml: ^4.1.0
+    dependencies:
+      '@maxwellx/context': link:../context
+      js-yaml: registry.npmmirror.com/js-yaml/4.1.0
+    devDependencies:
+      '@types/js-yaml': registry.npmmirror.com/@types/js-yaml/4.0.5
 
   packages/plugins/renderer-eta:
     specifiers:
@@ -58,38 +67,15 @@ importers:
     devDependencies:
       '@types/markdown-it': registry.npmmirror.com/@types/markdown-it/12.2.3
 
-  packages/post:
+  packages/router:
     specifiers:
       '@maxwellx/context': workspace:^1.0.0
-      '@types/js-yaml': ^4.0.5
-      js-yaml: ^4.1.0
-    dependencies:
-      '@maxwellx/context': link:../context
-      js-yaml: registry.npmmirror.com/js-yaml/4.1.0
-    devDependencies:
-      '@types/js-yaml': registry.npmmirror.com/@types/js-yaml/4.0.5
-
-  packages/renderer:
-    specifiers:
-      '@maxwellx/context': workspace:^1.0.0
-    dependencies:
-      '@maxwellx/context': link:../context
-
-  test:
-    specifiers:
-      '@maxwellx/api': workspace:^1.0.0
-      '@maxwellx/context': workspace:^1.0.0
-      '@maxwellx/core': workspace:^1.0.0
       '@maxwellx/layout': workspace:^1.0.0
-      '@maxwellx/renderer-eta': workspace:^1.0.0
-      '@maxwellx/renderer-markdown-it': workspace:^1.0.0
+      dayjs: ^1.10.7
     dependencies:
-      '@maxwellx/api': link:../packages/api
-      '@maxwellx/context': link:../packages/context
-      '@maxwellx/core': link:../packages/core
-      '@maxwellx/layout': link:../packages/post
-      '@maxwellx/renderer-eta': link:../packages/plugins/renderer-eta
-      '@maxwellx/renderer-markdown-it': link:../packages/plugins/renderer-markdown-it
+      '@maxwellx/context': link:../context
+      '@maxwellx/layout': link:../layout
+      dayjs: registry.npmmirror.com/dayjs/1.10.7
 
 packages:
 

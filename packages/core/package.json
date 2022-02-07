@@ -12,6 +12,7 @@
   "dependencies": {
     "@maxwellx/api": "workspace:^1.0.0",
     "@maxwellx/context": "workspace:^1.0.0",
-    "@maxwellx/layout": "workspace:^1.0.0"
+    "@maxwellx/layout": "workspace:^1.0.0",
+    "@maxwellx/router": "workspace:^1.0.0"
   }
 }
