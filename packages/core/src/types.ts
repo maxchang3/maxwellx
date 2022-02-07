@@ -1,5 +1,6 @@
 import type { context } from '@maxwellx/context'
 import type{ Renderer, withContent, withReading } from "@maxwellx/api";
+import type{ plugins } from "@maxwellx/api";
 
 
 interface maxwellCore {
@@ -8,7 +9,7 @@ interface maxwellCore {
         template: Renderer<withReading>,
         markdown: Renderer<withContent>
     },
-    plugins: any,
+    plugins: plugins,
 }
 
 export {maxwellCore}

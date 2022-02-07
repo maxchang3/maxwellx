@@ -30,6 +30,7 @@ export default returnConfig({
     },
     template: "default",
     plugins: [
-        "maxwell-renderer-pug"
+        "@maxwellx/renderer-eta",
+        "@maxwellx/renderer-markdown-it"
     ]
 })

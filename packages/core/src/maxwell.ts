@@ -1,11 +1,13 @@
 import { context, readConfig, writeFile, defaultConfig, __dirname } from "@maxwellx/context";
 import { getFilesContext } from "@maxwellx/layout";
-import { loadPluginModule } from "@maxwellx/api"
+import { loadPlugin  } from "@maxwellx/api"
 import { Router } from "@maxwellx/router"
+import { sep } from "path";
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
 import type { filesContext } from "@maxwellx/layout"
 import type { maxwellCore } from './types'
-import { sep } from "path";
+import type{ plugins } from "@maxwellx/api";
+
 
 class maxwell implements maxwellCore {
     context: context;
@@ -14,28 +16,32 @@ class maxwell implements maxwellCore {
         template: Renderer<withReading>,
         markdown: Renderer<withContent>
     };
-    plugins: any;
+    plugins: plugins;
     constructor() {
         this.context = { config: defaultConfig };
         this.filesContext = []
+        this.plugins = {
+            "Filter": [],
+            "Injector": [],
+            "Renderer<withContent>": "",
+            "Renderer<withReading>": "",
+            "Generator": []
+        }
     }
     async init() {
         await this.#setConfig();
         await this.#setFilesContext();
-        await this.#loadRenderer();
+        await this.#loadPlugin();
         await this.#getRouter();
     }
     async #setConfig() {
         this.context.config = await readConfig()
     }
-    async #loadRenderer() {
-        let [_template, _markdown] = await Promise.all([
-            loadPluginModule(this.context.config.renderer.template),
-            loadPluginModule(this.context.config.renderer.markdown)
-        ])
+    async #loadPlugin() {
+        this.plugins = await loadPlugin(this.context)
         this.renderer = {
-            template: _template,
-            markdown: _markdown
+            template: this.plugins["Renderer<withReading>"],
+            markdown: this.plugins["Renderer<withContent>"]
         }
     }
     async #setFilesContext() {

@@ -2,7 +2,7 @@ import type { context } from "@maxwellx/context"
 import type { filesContext, pageContext } from "@maxwellx/layout"
 import type { generatorFunc } from "./types"
 
-export class Generator {
+export class maxGenerator {
     #generatorFunc: generatorFunc
     constructor(callback: generatorFunc) {
         this.#generatorFunc = callback
