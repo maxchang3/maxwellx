@@ -15,8 +15,10 @@ importers:
   packages/api:
     specifiers:
       '@maxwellx/context': workspace:^1.0.0
+      '@maxwellx/layout': workspace:^1.0.0
     dependencies:
       '@maxwellx/context': link:../context
+      '@maxwellx/layout': link:../layout
 
   packages/context:
     specifiers: {}
