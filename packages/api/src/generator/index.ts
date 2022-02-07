@@ -13,6 +13,11 @@ export class maxGenerator {
             filesContext
         }
         let config = await this.#generatorFunc(generatorContext)
+        if (config.frontmatter) {
+            config.frontmatter.layout = config.layout
+        } else {
+            config.frontmatter = { layout: "index" }
+        }
         const pageContext: pageContext = {
             frontMatter: config.frontmatter || {},
             content: config.content || "",
