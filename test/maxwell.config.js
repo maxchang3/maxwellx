@@ -2,12 +2,12 @@ import { returnConfig } from "@maxwellx/context";
 
 export default returnConfig({
     site: {
-        title: "张麦麦的博客",
-        author: "张麦麦",
+        title: "Maxwell Static Site Generator",
+        author: "Max",
     },
     url: {
-        url: "http://zhangmaimai.com",
-        root: "/",
+        url: "",
+        root: "/test/public/",
         router: {
             "post": {
                 rule: ":year/:month/:day/:filename",
@@ -27,6 +27,7 @@ export default returnConfig({
     template: "default",
     plugins: [
         "@maxwellx/renderer-eta",
-        "@maxwellx/renderer-markdown-it"
+        "@maxwellx/renderer-markdown-it",
+        "@maxwellx/generator-basic"
     ]
 })

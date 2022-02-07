@@ -1,4 +1,9 @@
 <h1>index layout</h1>
 <p><%= it.config.site.title %></p>
 <p><%= it.pageContext.content %></p>
+<ul>
+<% it.pageContext.data.postList.forEach(function(post){ %>
+  <li><a href="<%= it.config.url.root %><%= post.filename %>"><%= post.title %></a></li>
+<% }) %>
+</ul>
 <%~ includeFile('./footer') %>
