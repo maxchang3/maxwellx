@@ -5,13 +5,13 @@ function definePlugin<T extends PluginType>(instance: T): T {
     return instance
 }
 
-async function getPluginPath(pkg: string) {
+async function _getPluginPath(pkg: string) {
     let pkgJSON = JSON.parse(await readFileContent(["node_modules", pkg, "package.json"]))
     return getFilePath("node_modules", pkg, pkgJSON.main)
 }
 
 async function loadPluginModule(pkg: string) {
-    return (await import(await getPluginPath(pkg))).default
+    return (await import(await _getPluginPath(pkg))).default
 }
 
-export { definePlugin, getPluginPath , loadPluginModule }
+export { definePlugin, loadPluginModule }
