@@ -1,12 +1,12 @@
 import { context, readConfig, writeFile, defaultConfig, __dirname } from "@maxwellx/context";
 import { getFilesContext } from "@maxwellx/layout";
-import { loadPlugin  } from "@maxwellx/api"
+import { loadPlugin, maxGenerator } from "@maxwellx/api"
 import { Router } from "@maxwellx/router"
 import { sep } from "path";
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
 import type { filesContext } from "@maxwellx/layout"
 import type { maxwellCore } from './types'
-import type{ plugins } from "@maxwellx/api";
+import type { plugins } from "@maxwellx/api";
 
 
 class maxwell implements maxwellCore {
@@ -25,14 +25,15 @@ class maxwell implements maxwellCore {
             "Injector": [],
             "Renderer<withContent>": "",
             "Renderer<withReading>": "",
-            "Generator": []
+            "maxGenerator": []
         }
     }
     async init() {
-        await this.#setConfig();
-        await this.#setFilesContext();
-        await this.#loadPlugin();
-        await this.#getRouter();
+        await this.#setConfig()
+        await this.#setFilesContext()
+        await this.#loadPlugin()
+        await this.#getRouter()
+        await this.#initGenerator()
     }
     async #setConfig() {
         this.context.config = await readConfig()
@@ -50,7 +51,7 @@ class maxwell implements maxwellCore {
     async #getRouter() {
         if (!(this.renderer)) throw new Error("renderer not init")
         const { template } = this.renderer
-        this.filesContext.forEach(pageContext=>{
+        this.filesContext.forEach(pageContext => {
             let _layout = pageContext.frontMatter.layout
             if (!(Object.keys(this.context.config.url.router).includes(_layout))) {
                 _layout = "*"
@@ -65,11 +66,20 @@ class maxwell implements maxwellCore {
         })
         return this.filesContext
     }
-
+    async #initGenerator() {
+        this.filesContext = this.filesContext.concat(
+            await Promise.all(this.plugins.maxGenerator.map(
+                async (generator: maxGenerator) =>{
+                    let a = await generator.generate(this.context, this.filesContext)
+                    console.log(a)
+                    return a
+                }
+            )))
+    }
     async render() {
         if (!(this.renderer)) throw new Error("renderer not init")
         const { markdown, template } = this.renderer
-        await Promise.all(this.filesContext.map(async(pageContext)=>{
+        await Promise.all(this.filesContext.map(async (pageContext) => {
             //<Filter Plugin> todo:1 before_content_render
             pageContext.content = await markdown.render(pageContext, this.context)
             //<Filter Plugin> todo:2 after_content_render
@@ -86,7 +96,7 @@ class maxwell implements maxwellCore {
         }))
     }
     async write() {
-        await Promise.all(this.filesContext.map(async(pageContext)=>{
+        await Promise.all(this.filesContext.map(async (pageContext) => {
             let _layout = pageContext.frontMatter.layout
             if (!(Object.keys(this.context.config.url.router).includes(_layout))) {
                 _layout = "*"
