@@ -1,0 +1,4 @@
+<h1>index layout</h1>
+<p><%= it.config.site.title %></p>
+<p><%= it.pageContext.content %></p>
+<%~ includeFile('./footer') %>
