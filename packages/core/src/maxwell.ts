@@ -1,7 +1,7 @@
 import { context, readConfig, writeFile, promiseAllObject, defaultConfig, __dirname } from "@maxwellx/context";
 import { getFilesContext } from "@maxwellx/layout";
 import { loadPluginModule } from "@maxwellx/api"
-import {  Router } from "@maxwellx/router"
+import { Router } from "@maxwellx/router"
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
 import type { filesContext } from "@maxwellx/layout"
 import type { maxwellCore } from './types'
@@ -65,17 +65,15 @@ class maxwell implements maxwellCore {
             promiseAllObject(filesContext[layout], async (file) => {
                 let layoutRouter
                 let pageContext = filesContext[layout][file]
-                if (pageContext.frontMatter.layout === "post") {
-                    layoutRouter = new Router(
-                        this.context.config.url.router.post.rule,
-                        pageContext,
-                        this.context.config.url.router.post.withIndex);
-                } else {
-                    layoutRouter = new Router(
-                        this.context.config.url.router["*"].rule,
-                        pageContext,
-                        this.context.config.url.router["*"].withIndex);
+                let _layout = pageContext.frontMatter.layout
+                if (!(Object.keys(this.context.config.url.router).includes(_layout))) {
+                    _layout = "*"
                 }
+                layoutRouter = new Router(
+                    this.context.config.url.router[_layout].rule,
+                    pageContext,
+                    this.context.config.url.router[_layout].withIndex
+                );
                 pageContext.filename = layoutRouter.format()
                 pageContext.filename += template.options?.output
                 let basepath = [
