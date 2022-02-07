@@ -81,7 +81,9 @@ class maxwell implements maxwellCore {
         const { markdown, template } = this.renderer
         await Promise.all(this.filesContext.map(async (pageContext) => {
             //<Filter Plugin> todo:1 before_content_render
-            pageContext.content = await markdown.render(pageContext, this.context)
+            if(pageContext.content!=""){
+                pageContext.content = await markdown.render(pageContext, this.context)
+            }
             //<Filter Plugin> todo:2 after_content_render
             let _context: context = {
                 config: this.context.config,
