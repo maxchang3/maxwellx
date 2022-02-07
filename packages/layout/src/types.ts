@@ -7,7 +7,8 @@ interface layoutFiles {
 interface pageContext {
     frontMatter: frontMatter
     content: string,
-    filename: string
+    filename: string,
+    data?: any
 }
 type filesContext = pageContext[]
 
