@@ -22,7 +22,7 @@ async function loadPlugin(context: context) {
         "Injector": [],
         "Renderer<withContent>": "",
         "Renderer<withReading>": "",
-        "Generator": []
+        "maxGenerator": []
     }
     await Promise.all(pluginList.map(async (plugin) => {
         let _pluginInstance = await _loadModule(plugin)

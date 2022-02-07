@@ -1,4 +1,5 @@
-import type { Renderer, withContent, withReading } from './renderer/index.js'
+import { maxGenerator } from './index.js'
+import type { Renderer, withContent, withReading } from './index.js'
 
 interface Filter {
 
@@ -8,7 +9,7 @@ interface Injector {
 
 }
 
-type PluginType = Filter | Injector | Renderer<withContent> | Renderer<withReading> | Generator
+type PluginType = Filter | Injector | Renderer<withContent> | Renderer<withReading> | maxGenerator
 
 
 
@@ -22,7 +23,7 @@ interface plugins {
     "Injector": any[],
     "Renderer<withContent>": any,
     "Renderer<withReading>": any,
-    "Generator": any[]
+    "maxGenerator": any[]
 }
 
 export { maxPlugin, PluginType, Filter, plugins }
