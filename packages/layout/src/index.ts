@@ -1,3 +1,3 @@
 export { getFilesContext } from "./layout.js"
 
-export type { layoutContext } from "./types"
+export type { layoutContext , filesContext} from "./types"

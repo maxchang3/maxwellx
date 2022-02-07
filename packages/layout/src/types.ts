@@ -9,5 +9,10 @@ interface layoutContext {
     content: string,
     filename: string
 }
+interface filesContext {
+    [layout: string]: {
+        [filename: string]: layoutContext
+    }
+}
 
-export { frontMatter, layoutContext , layoutFiles }
+export { frontMatter, layoutContext, layoutFiles , filesContext }
