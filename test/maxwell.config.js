@@ -28,6 +28,7 @@ export default returnConfig({
     plugins: [
         "@maxwellx/renderer-eta",
         "@maxwellx/renderer-markdown-it",
-        "@maxwellx/generator-basic"
+        "@maxwellx/generator-basic",
+        "@maxwellx/filter-test"
     ]
 })

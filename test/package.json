@@ -13,6 +13,7 @@
     "@maxwellx/api": "workspace:^1.0.0",
     "@maxwellx/context": "workspace:^1.0.0",
     "@maxwellx/core": "workspace:^1.0.0",
+    "@maxwellx/filter-test": "workspace:^1.0.0",
     "@maxwellx/generator-basic": "workspace:^1.0.0",
     "@maxwellx/layout": "workspace:^1.0.0",
     "@maxwellx/renderer-eta": "workspace:^1.0.0",
