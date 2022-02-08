@@ -112,12 +112,14 @@ class maxwell implements maxwellCore {
         }))
     }
     async write() {
+        // copy files from source folder
         copyFromTo([
             this.context.config.directory.template,
             this.context.config.template,
             "source"], [
             this.context.config.directory.public
         ])
+        // write all rendered files
         await Promise.all(this.filesContext.map(async (pageContext) => {
             let basepath = [
                 this.context.config.directory.public,
