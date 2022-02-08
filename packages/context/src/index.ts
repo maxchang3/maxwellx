@@ -1,7 +1,7 @@
 export { readConfig, returnConfig, defaultConfig } from './config.js'
 export {
     readFileContent, getFilePath, getFiles,
-    getDirs, writeFile, forPromiseAll,
+    getDirs, writeFile, forPromiseAll, copyFromTo,
     configPath, __dirname
 } from './utils.js'
 export { logger } from "./logger.js"

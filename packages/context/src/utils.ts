@@ -46,18 +46,38 @@ async function writeFile(paths: string[], content: string) {
  * Traverse the given keyList, and pass each key into the given promise function
  * then Promise.all() the promise list and get the whole value once
  */
-async function forPromiseAll<T>(keyList: string[], promiseFunc: (key: string) => Promise<T>,withKey?:boolean) {
+async function forPromiseAll<T>(keyList: string[], promiseFunc: (key: string) => Promise<T>, withKey?: boolean) {
     let _promiseList = keyList.map(key => promiseFunc(key));
     let values = (await Promise.all(_promiseList))
-    if(!(withKey)) return values
+    if (!(withKey)) return values
     let _result: { [key: string]: T } = {}
     values.forEach((value, index) => _result[keyList[index]] = value)
     return _result
 }
 
+async function copyFromTo(src: string[], dest: string[], complete: boolean = true) {
+    let _src: string, _dest: string
+    if (complete) {
+        _src = getFilePath(...src)
+        _dest = getFilePath(...dest)
+    } else {
+        _src = src[0]
+        _dest = dest[0]
+    }
+    await fs.mkdir(_dest, { recursive: true });
+    let entries = await fs.readdir(_src, { withFileTypes: true });
+    for (let entry of entries) {
+        let srcPath = path.join(_src, entry.name);
+        let destPath = path.join(_dest, entry.name);
+
+        entry.isDirectory() ?
+            await copyFromTo([srcPath], [destPath], false) :
+            await fs.copyFile(srcPath, destPath);
+    }
+}
 
 export {
     readFileContent, getFilePath, getFiles,
-    getDirs, writeFile, forPromiseAll, 
+    getDirs, writeFile, forPromiseAll, copyFromTo,
     configPath, __dirname, path
 }
