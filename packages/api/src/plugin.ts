@@ -1,9 +1,9 @@
-import { context, getFilePath, getFiles, readFileContent } from '@maxwellx/context'
-import { Renderer,  withReading } from '.'
+import { context, getFilePath, readFileContent } from '@maxwellx/context'
+import type { Renderer, withReading } from '.'
 import type { PluginType, plugins } from './types'
 
-function definePlugin<T extends PluginType>(instance: T): T {
-    return instance
+function definePlugin(instanceList: PluginType[] | PluginType) {
+    return instanceList
 }
 
 async function _getPluginPath(pkg: string) {
@@ -25,22 +25,30 @@ async function loadPlugin(context: context) {
         "maxGenerator": []
     }
     await Promise.all(pluginList.map(async (plugin) => {
-        let _pluginInstance = await _loadModule(plugin)
-        let _unloadType = _pluginInstance.constructor.name
-        let pluginType: keyof plugins;
-        if (_unloadType === "Renderer") {
-            if ((_pluginInstance as Renderer<withReading>).options) {
-                pluginType = "Renderer<withReading>"
-            } else {
-                pluginType = "Renderer<withContent>"
-            }
-            plugins[pluginType] = _pluginInstance
-            return;
+        let _pluginInstance: PluginType | PluginType[] = await _loadModule(plugin)
+        let _instanceList: PluginType[] = [];
+        if (!(_pluginInstance instanceof Array)) {
+            _instanceList.push(_pluginInstance)
+        } else {
+            _instanceList = _pluginInstance
         }
-        pluginType = _unloadType
-        plugins[pluginType].push(_pluginInstance)
+        _instanceList.forEach(_instance => {
+            let _unloadType = _instance.constructor.name
+            let pluginType: keyof plugins;
+            if (_unloadType === "Renderer") {
+                if ((_instance as Renderer<withReading>).options) {
+                    pluginType = "Renderer<withReading>"
+                } else {
+                    pluginType = "Renderer<withContent>"
+                }
+                plugins[pluginType] = _instance
+                return;
+            }
+            pluginType = _unloadType as keyof plugins
+            plugins[pluginType].push(_instance)
+        })
     }))
     return plugins
 }
 
-export { definePlugin , loadPlugin }
+export { definePlugin, loadPlugin }
