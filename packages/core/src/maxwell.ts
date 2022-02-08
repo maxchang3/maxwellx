@@ -1,4 +1,4 @@
-import { context, readConfig, writeFile, logger, defaultConfig, __dirname } from "@maxwellx/context";
+import { context, readConfig, writeFile, copyFromTo, logger, defaultConfig, __dirname } from "@maxwellx/context";
 import { getFilesContext } from "@maxwellx/layout";
 import { loadPlugin, maxGenerator } from "@maxwellx/api"
 import { Router } from "@maxwellx/router"
@@ -113,6 +113,12 @@ class maxwell implements maxwellCore {
         }))
     }
     async write() {
+        copyFromTo([
+            this.context.config.directory.template,
+            this.context.config.template,
+            "source"], [
+            this.context.config.directory.public
+        ])
         await Promise.all(this.filesContext.map(async (pageContext) => {
             let _layout = pageContext.frontMatter.layout
             if (!(Object.keys(this.context.config.url.router).includes(_layout))) {
