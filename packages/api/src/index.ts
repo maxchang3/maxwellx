@@ -7,5 +7,6 @@ export { maxGenerator } from "./generator/index.js"
 export type{ generatorConfig } from "./generator/types"
 
 export { Filter } from "./filter/index.js"
+export { filter } from "./filter/types"
 
 export type { PluginType, plugins } from './types'
