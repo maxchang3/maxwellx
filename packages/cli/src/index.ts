@@ -1,8 +1,8 @@
+import { logger, defaultConfig, writeFile, configure } from '@maxwellx/context'
+import { promptsInit } from './prompt.js'
+import { maxwell } from '@maxwellx/core'
 import { Command } from 'commander'
 import inquirer from 'inquirer'
-import { maxwell } from '@maxwellx/core'
-import { logger, defaultConfig, writeFile } from '@maxwellx/context'
-
 const program = new Command();
 const core = new maxwell();
 
@@ -20,8 +20,10 @@ const getPerf = async (callback: () => Promise<void>) => {
     await callback()
     let _end = performance.now()
     return _end - _start
-
 }
+
+const getConfig = (outputConfig:configure) => `import { returnConfig } from "@maxwellx/context";\nexport default returnConfig(${JSON.stringify(outputConfig, null, "\t")})\n`
+
 program
     .name('maxwellx')
     .description('cli for maxwellx static site generator')
@@ -59,40 +61,12 @@ program.command('init')
     .action(async (options) => {
         let outputConfig = defaultConfig
         if (!(options.y)) {
-            const answers = await inquirer.prompt([
-                {
-                    type: "input",
-                    message: "input your site title: ",
-                    name: "title",
-                    default: "Maxwell Site"
-                },
-                {
-                    type: "input",
-                    message: "input your site author name: ",
-                    name: "author",
-                    default: "Max"
-                },
-                {
-                    type: "confirm",
-                    message: "use `/` as your site root path? ",
-                    name: "isRoot",
-                    default: true
-                },
-                {
-                    type: "input",
-                    message: "input your site root path: ",
-                    name: "root",
-                    default: "/",
-                    when: (answer) => (!(answer.isRoot))
-                },
-            ])
-
+            const answers = await inquirer.prompt(promptsInit)
             outputConfig.site.title = answers.title
             outputConfig.site.author = answers.author
             outputConfig.url.root = answers.isRoot ? "/" : answers.root
         }
-        let configString = `import { returnConfig } from "@maxwellx/context";\nexport default returnConfig(${JSON.stringify(outputConfig, null, "\t")})\n`
-        writeFile(["maxwell.config.js"], configString)
+        writeFile(["maxwell.config.js"], getConfig(outputConfig))
             .then(() => {
                 logger.sucesss("init success!")
             }).catch((error) => {
