@@ -1,23 +1,14 @@
-import { context } from "@maxwellx/context";
-
+import type { context } from "@maxwellx/context";
+import type { pageContext } from "@maxwellx/layout"
 interface renderFilepath {
     path: string,
     filename: string
 }
-interface renderData {
-    content: string
-}
+type renderData = pageContext
 
 type withReading = (data: renderFilepath, context: context, options?: object) => Promise<string>;
 type withContent = (data: renderData, context: context, options?: object) => Promise<string>;
 type dataOrPath<T> = (T extends withContent ? renderData : renderFilepath)
-
-interface rendererWithRead {
-    input: string;
-    output: string;
-    callback: withReading;
-    render(path: string[], filename: string, context: context, options?: object): Promise<string>
-}
 
 interface renderOptions {
     input: string;
@@ -33,7 +24,7 @@ interface maxRenderer<T extends (withContent | withReading)> {
 
 export {
     renderFilepath, renderData,
-    maxRenderer, rendererWithRead,
-    withContent, withReading,
-    renderOptions, dataOrPath
+    maxRenderer, withContent,
+    withReading, renderOptions,
+    dataOrPath
 }
