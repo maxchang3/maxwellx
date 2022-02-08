@@ -2,11 +2,12 @@ import { context, readConfig, writeFile, logger, defaultConfig, __dirname } from
 import { getFilesContext } from "@maxwellx/layout";
 import { loadPlugin, maxGenerator } from "@maxwellx/api"
 import { Router } from "@maxwellx/router"
+import { maxEvent } from "./events.js";
 import { sep } from "path";
 import type { Renderer, withContent, withReading } from "@maxwellx/api";
 import type { filesContext } from "@maxwellx/layout"
 import type { maxwellCore } from './types'
-import type { plugins } from "@maxwellx/api";
+import type { plugins, Filter } from "@maxwellx/api";
 
 
 class maxwell implements maxwellCore {
@@ -20,6 +21,7 @@ class maxwell implements maxwellCore {
     #log = {
         templateError: () => logger.error("Renderers may not init correctly.")
     }
+    #event: maxEvent;
     constructor() {
         this.context = { config: defaultConfig };
         this.filesContext = []
@@ -31,11 +33,13 @@ class maxwell implements maxwellCore {
             "maxGenerator": []
         }
         this.renderer = {}
+        this.#event = maxEvent.getEvent()
     }
     async init() {
         await this.#setConfig()
         await this.#setFilesContext()
         await this.#loadPlugin()
+        this.#emitEvents()
         await this.#getRouter()
         await this.#initGenerator()
     }
@@ -80,6 +84,11 @@ class maxwell implements maxwellCore {
                     await generator.generate(this.context, this.filesContext)
             )))
     }
+    #emitEvents() {
+        this.plugins.Filter.forEach((instance: Filter) => {
+            this.#event.on(instance.filter, instance.filterFunc)
+        })
+    }
     async render() {
         if (!(this.renderer.template) || !(this.renderer.markdown)) {
             this.#log.templateError()
@@ -87,21 +96,20 @@ class maxwell implements maxwellCore {
         }
         const { markdown, template } = this.renderer
         await Promise.all(this.filesContext.map(async (pageContext) => {
-            //<Filter Plugin> todo:1 before_content_render
+            this.#event.emit("before_content_render", pageContext)
             if (pageContext.content != "") {
+                console.log(pageContext)
                 pageContext = await markdown.render(pageContext, this.context)
             }
-            //<Filter Plugin> todo:2 after_content_render
+            this.#event.emit("after_content_render", pageContext)
             let _context: context = {
                 config: this.context.config,
                 pageContext
             }
-            //<Filter Plugin> todo3: before_layout_render
             pageContext = await template.render({
                 filename: `${pageContext.frontMatter.layout}`,
                 path: `${this.context.config.directory.template}${sep}${this.context.config.template}`
             }, _context)
-            //<Filter Plugin> todo4: after_layout_render
         }))
     }
     async write() {

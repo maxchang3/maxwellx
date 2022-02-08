@@ -41,11 +41,11 @@ async function loadPlugin(context: context) {
                 } else {
                     pluginType = "Renderer<withContent>"
                 }
-                plugins[pluginType] = _pluginInstance
+                plugins[pluginType] = _instance
                 return;
             }
             pluginType = _unloadType as keyof plugins
-            plugins[pluginType].push(_pluginInstance)
+            plugins[pluginType].push(_instance)
         })
     }))
     return plugins

@@ -94,6 +94,26 @@ importers:
       '@maxwellx/layout': link:../layout
       dayjs: registry.npmmirror.com/dayjs/1.10.7
 
+  test:
+    specifiers:
+      '@maxwellx/api': workspace:^1.0.0
+      '@maxwellx/context': workspace:^1.0.0
+      '@maxwellx/core': workspace:^1.0.0
+      '@maxwellx/filter-test': workspace:^1.0.0
+      '@maxwellx/generator-basic': workspace:^1.0.0
+      '@maxwellx/layout': workspace:^1.0.0
+      '@maxwellx/renderer-eta': workspace:^1.0.0
+      '@maxwellx/renderer-markdown-it': workspace:^1.0.0
+    dependencies:
+      '@maxwellx/api': link:../packages/api
+      '@maxwellx/context': link:../packages/context
+      '@maxwellx/core': link:../packages/core
+      '@maxwellx/filter-test': link:../packages/plugins/filter-test
+      '@maxwellx/generator-basic': link:../packages/plugins/generator-basic
+      '@maxwellx/layout': link:../packages/layout
+      '@maxwellx/renderer-eta': link:../packages/plugins/renderer-eta
+      '@maxwellx/renderer-markdown-it': link:../packages/plugins/renderer-markdown-it
+
 packages:
 
   registry.nlark.com/ansi-regex/5.0.1:
