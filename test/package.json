@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@maxwellx/api": "workspace:^1.0.0",
+    "@maxwellx/cli": "workspace:^1.0.0",
     "@maxwellx/context": "workspace:^1.0.0",
     "@maxwellx/core": "workspace:^1.0.0",
     "@maxwellx/filter-test": "workspace:^1.0.0",
