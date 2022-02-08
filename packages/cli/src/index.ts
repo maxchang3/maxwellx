@@ -23,7 +23,7 @@ const getPerf = async (callback: () => Promise<void>) => {
     return _end - _start
 }
 
-const getConfig = (outputConfig:configure) => `import { returnConfig } from "@maxwellx/context";\nexport default returnConfig(${JSON.stringify(outputConfig, null, "\t")})\n`
+const getConfig = (outputConfig: configure) => `import { returnConfig } from "@maxwellx/context";\nexport default returnConfig(${JSON.stringify(outputConfig, null, "\t")})\n`
 
 program
     .name('maxwellx')
@@ -78,5 +78,20 @@ program.command('init')
             })
     })
 
-
+program.command('new')
+    .alias('n')
+    .description("create .md files in your source folder")
+    .argument('<title>', 'filename')
+    .argument('[layout]', 'layout', "post")
+    .action(async (title, layout) => {
+        const template = `---\ntitle: ${title}\ndate: ${new Date().toISOString()}\ndescription: ''\n---`
+        logger.info("loading config…")
+        await core.setConfig()
+        writeFile([core.context.config.directory.source, layout, `${title}.md`], template)
+            .then((filename) => {
+                logger.sucesss(`Created: \x1B[36m${filename}`)
+            }).catch((error) => {
+                logger.error(error)
+            })
+    })
 program.parse();
