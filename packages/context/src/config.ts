@@ -23,7 +23,7 @@ const defaultConfig:configure = {
     directory: {
         source: "source",
         public: "public",
-        template: "template"
+        template: "theme"
     },
     template: "default",
     plugins: [
