@@ -30,7 +30,8 @@ async function getPageContext(...folder: string[]) {
     let context: pageContext = {
         frontMatter,
         content: layoutContent,
-        filename
+        filename,
+        data: {}
     }
     return context
 }
