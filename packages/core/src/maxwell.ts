@@ -36,14 +36,14 @@ class maxwell implements maxwellCore {
         this.#event = maxEvent.getEvent()
     }
     async init() {
-        await this.#setConfig()
+        await this.setConfig()
         await this.#setFilesContext()
         await this.#loadPlugin()
         this.#emitEvents()
         await this.#getRouter()
         await this.#initGenerator()
     }
-    async #setConfig() {
+    async setConfig() {
         this.context.config = await readConfig()
     }
     async #loadPlugin() {
