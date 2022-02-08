@@ -1,8 +1,8 @@
 import { returnConfig } from "@maxwellx/context";
 export default returnConfig({
 	"site": {
-		"title": "Maxwell Blog",
-		"author": "Maxwell"
+		"title": "Maxwell Site",
+		"author": "Max"
 	},
 	"url": {
 		"url": "",
