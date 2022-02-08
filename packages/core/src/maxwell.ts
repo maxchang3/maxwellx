@@ -98,7 +98,6 @@ class maxwell implements maxwellCore {
         await Promise.all(this.filesContext.map(async (pageContext) => {
             this.#event.emit("before_content_render", pageContext)
             if (pageContext.content != "") {
-                console.log(pageContext)
                 pageContext = await markdown.render(pageContext, this.context)
             }
             this.#event.emit("after_content_render", pageContext)
@@ -120,10 +119,6 @@ class maxwell implements maxwellCore {
             this.context.config.directory.public
         ])
         await Promise.all(this.filesContext.map(async (pageContext) => {
-            let _layout = pageContext.frontMatter.layout
-            if (!(Object.keys(this.context.config.url.router).includes(_layout))) {
-                _layout = "*"
-            }
             let basepath = [
                 this.context.config.directory.public,
                 ...pageContext.filename.split(sep)
