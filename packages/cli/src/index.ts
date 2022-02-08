@@ -84,4 +84,5 @@ program.command('new')
                 logger.error(error)
             })
     })
+
 program.parse();
