@@ -62,6 +62,7 @@ program.command('init')
     .description("init your blog with an empty folder, skip all with `-y`")
     .option('-y', 'skip all questions use default value')
     .action(async (options) => {
+        // Todo: clone template repo to the folder exec `<packageManager> install`
         let outputConfig = defaultConfig
         if (!(options.y)) {
             const answers = await inquirer.prompt(promptsInit)
