@@ -1,13 +1,10 @@
 import type {
+    Filter,
     maxGenerator,
     Renderer,
     withContent,
     withReading
 } from '.'
-
-interface Filter {
-
-}
 
 interface Injector {
 
