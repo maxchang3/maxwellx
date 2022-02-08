@@ -7,7 +7,8 @@ const etaRenderer = new Renderer<withReading>(async (data, context, options) => 
         views: data.path,
         cache: true
     })
-    return renderFile(data.filename, context, { autoEscape: false }) as Promise<string>;
+    context.pageContext.content =  await renderFile(data.filename, context, { autoEscape: false })
+    return context.pageContext
 }, {
     input: "eta",
     output: "html"

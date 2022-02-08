@@ -89,7 +89,7 @@ class maxwell implements maxwellCore {
         await Promise.all(this.filesContext.map(async (pageContext) => {
             //<Filter Plugin> todo:1 before_content_render
             if (pageContext.content != "") {
-                pageContext.content = await markdown.render(pageContext, this.context)
+                pageContext = await markdown.render(pageContext, this.context)
             }
             //<Filter Plugin> todo:2 after_content_render
             let _context: context = {
@@ -97,7 +97,7 @@ class maxwell implements maxwellCore {
                 pageContext
             }
             //<Filter Plugin> todo3: before_layout_render
-            pageContext.content = await template.render({
+            pageContext = await template.render({
                 filename: `${pageContext.frontMatter.layout}`,
                 path: this.context.config.directory.template
             }, _context)

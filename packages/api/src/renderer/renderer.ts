@@ -16,7 +16,7 @@ export class Renderer<T extends (withContent | withReading)> implements maxRende
     constructor(callback: T, options?: renderOptions) {
         [this.callback, this.options] = [callback, options]
     }
-    render(data: dataOrPath<T>, context: context): Promise<string> {
+    render(data: dataOrPath<T>, context: context): Promise<renderData> {
         if (this.options) {
             let _data = (<renderFilepath>data)
             return (<withReading>this.callback)({

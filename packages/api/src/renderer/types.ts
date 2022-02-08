@@ -6,8 +6,8 @@ interface renderFilepath {
 }
 type renderData = pageContext
 
-type withReading = (data: renderFilepath, context: context, options?: object) => Promise<string>;
-type withContent = (data: renderData, context: context, options?: object) => Promise<string>;
+type withReading = (data: renderFilepath, context: context, options?: object) => Promise<renderData>;
+type withContent = (data: renderData, context: context, options?: object) => Promise<renderData>;
 type dataOrPath<T> = (T extends withContent ? renderData : renderFilepath)
 
 interface renderOptions {
@@ -18,7 +18,7 @@ interface renderOptions {
 interface maxRenderer<T extends (withContent | withReading)> {
     callback: T;
     options?: renderOptions;
-    render(data: dataOrPath<T>, context: context, options?: object): Promise<string>
+    render(data: dataOrPath<T>, context: context, options?: object): Promise<renderData>
 }
 
 

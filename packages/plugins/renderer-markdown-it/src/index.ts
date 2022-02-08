@@ -5,7 +5,8 @@ import MarkdownIt from "markdown-it";
 const md = MarkdownIt()
 
 const markdownitRenderer = new Renderer<withContent>(async(data,context,options)=>{
-    return md.render(data.content);
+    data.content = md.render(data.content)
+    return data;
 })
 
 export default definePlugin(markdownitRenderer)
