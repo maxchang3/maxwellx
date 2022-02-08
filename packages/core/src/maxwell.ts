@@ -19,7 +19,7 @@ class maxwell implements maxwellCore {
     };
     plugins: plugins;
     #log = {
-        templateError: () => logger.error("Renderers may not init correctly.")
+        templateError: () => logger.error(new Error("Renderers may not init correctly."))
     }
     #event: maxEvent;
     constructor() {
