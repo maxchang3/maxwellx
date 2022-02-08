@@ -4,7 +4,7 @@ export class logger {
   static sucesss = consola.success
   static log = consola.log
   static info = consola.info
-  static error = (errorMessage?: string) => {
+  static error = (errorMessage?: string | Error) => {
     if (typeof errorMessage === "object") {
       consola.error(errorMessage)
     } else {
