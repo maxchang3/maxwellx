@@ -59,7 +59,7 @@ program.command('generate')
     });
 
 program.command('init')
-    .description("init your blog with an empty folder")
+    .description("init your blog with an empty folder, skip all with `-y`")
     .option('-y', 'skip all questions use default value')
     .action(async (options) => {
         let outputConfig = defaultConfig
