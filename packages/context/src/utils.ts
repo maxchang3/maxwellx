@@ -39,7 +39,8 @@ async function readFileContent(paths: string[], options?: readFileOptions) {
 
 async function writeFile(paths: string[], content: string) {
     await fs.mkdir(getFilePath(...paths.slice(0, -1)), { recursive: true })
-    return fs.writeFile(getFilePath(...paths), content)
+    const filePath = getFilePath(...paths)
+    return fs.writeFile(filePath, content).then(()=> filePath)
 }
 
 /**
