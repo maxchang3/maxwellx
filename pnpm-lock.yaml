@@ -47,11 +47,11 @@ importers:
     devDependencies:
       js-yaml: registry.npmmirror.com/js-yaml/4.1.0
 
-  packages/logger:
+  packages/plugins/filter-test:
     specifiers:
-      consola: ^2.15.3
+      '@maxwellx/api': workspace:^1.0.0
     dependencies:
-      consola: registry.npmmirror.com/consola/2.15.3
+      '@maxwellx/api': link:../../api
 
   packages/plugins/generator-basic:
     specifiers:
