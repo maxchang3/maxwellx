@@ -4,9 +4,9 @@ import MarkdownIt from "markdown-it";
 
 const md = MarkdownIt()
 
-const markdownitRenderer = new Renderer<withContent>(async(data,context,options)=>{
-    data.content = md.render(data.content)
-    return data;
+const markdownitRenderer = new Renderer<withContent>(async(pageContext,context,options)=>{
+    pageContext.content = md.render(pageContext.content)
+    return pageContext
 })
 
 export default definePlugin(markdownitRenderer)
