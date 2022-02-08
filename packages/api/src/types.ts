@@ -1,5 +1,9 @@
-import { maxGenerator } from './index.js'
-import type { Renderer, withContent, withReading } from './index.js'
+import type {
+    maxGenerator,
+    Renderer,
+    withContent,
+    withReading
+} from '.'
 
 interface Filter {
 
