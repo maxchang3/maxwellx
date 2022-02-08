@@ -77,10 +77,14 @@ importers:
       '@maxwellx/context': workspace:^1.0.0
       '@types/markdown-it': ^12.2.3
       markdown-it: ^12.3.2
+      markdown-it-anchor: ^8.4.1
+      markdown-it-toc-done-right: ^4.2.0
     dependencies:
       '@maxwellx/api': link:../../api
       '@maxwellx/context': link:../../context
       markdown-it: registry.npmmirror.com/markdown-it/12.3.2
+      markdown-it-anchor: registry.npmmirror.com/markdown-it-anchor/8.4.1_d643ca6eb40ae68ab966a77bead78073
+      markdown-it-toc-done-right: registry.npmmirror.com/markdown-it-toc-done-right/4.2.0
     devDependencies:
       '@types/markdown-it': registry.npmmirror.com/@types/markdown-it/12.2.3
 
@@ -856,6 +860,25 @@ packages:
     dependencies:
       semver: registry.nlark.com/semver/6.3.0
     dev: true
+
+  registry.npmmirror.com/markdown-it-anchor/8.4.1_d643ca6eb40ae68ab966a77bead78073:
+    resolution: {integrity: sha512-sLODeRetZ/61KkKLJElaU3NuU2z7MhXf12Ml1WJMSdwpngeofneCRF+JBbat8HiSqhniOMuTemXMrsI7hA6XyA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/markdown-it-anchor/-/markdown-it-anchor-8.4.1.tgz}
+    id: registry.npmmirror.com/markdown-it-anchor/8.4.1
+    name: markdown-it-anchor
+    version: 8.4.1
+    peerDependencies:
+      '@types/markdown-it': '*'
+      markdown-it: '*'
+    dependencies:
+      '@types/markdown-it': registry.npmmirror.com/@types/markdown-it/12.2.3
+      markdown-it: registry.npmmirror.com/markdown-it/12.3.2
+    dev: false
+
+  registry.npmmirror.com/markdown-it-toc-done-right/4.2.0:
+    resolution: {integrity: sha512-UB/IbzjWazwTlNAX0pvWNlJS8NKsOQ4syrXZQ/C72j+jirrsjVRT627lCaylrKJFBQWfRsPmIVQie8x38DEhAQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/markdown-it-toc-done-right/-/markdown-it-toc-done-right-4.2.0.tgz}
+    name: markdown-it-toc-done-right
+    version: 4.2.0
+    dev: false
 
   registry.npmmirror.com/markdown-it/12.3.2:
     resolution: {integrity: sha512-TchMembfxfNVpHkbtriWltGWc+m3xszaRD0CZup7GFFhzIgQqxIfn3eGj1yZpfuflzPvfkt611B2Q/Bsk1YnGg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/markdown-it/-/markdown-it-12.3.2.tgz}
