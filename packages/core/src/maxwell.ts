@@ -99,7 +99,7 @@ class maxwell implements maxwellCore {
             //<Filter Plugin> todo3: before_layout_render
             pageContext = await template.render({
                 filename: `${pageContext.frontMatter.layout}`,
-                path: this.context.config.directory.template
+                path: `${this.context.config.directory.template}${sep}${this.context.config.template}`
             }, _context)
             //<Filter Plugin> todo4: after_layout_render
         }))
