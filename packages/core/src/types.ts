@@ -5,9 +5,9 @@ import type{ plugins } from "@maxwellx/api";
 
 interface maxwellCore {
     context:context,
-    renderer?: {
-        template: Renderer<withReading>,
-        markdown: Renderer<withContent>
+    renderer: {
+        template?: Renderer<withReading>,
+        markdown?: Renderer<withContent>
     },
     plugins: plugins,
 }

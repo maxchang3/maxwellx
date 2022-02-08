@@ -1,4 +1,4 @@
-import { context, readConfig, writeFile, defaultConfig, __dirname } from "@maxwellx/context";
+import { context, readConfig, writeFile, logger, defaultConfig, __dirname } from "@maxwellx/context";
 import { getFilesContext } from "@maxwellx/layout";
 import { loadPlugin, maxGenerator } from "@maxwellx/api"
 import { Router } from "@maxwellx/router"
@@ -12,11 +12,14 @@ import type { plugins } from "@maxwellx/api";
 class maxwell implements maxwellCore {
     context: context;
     filesContext: filesContext;
-    renderer?: {
-        template: Renderer<withReading>,
-        markdown: Renderer<withContent>
+    renderer: {
+        template?: Renderer<withReading>,
+        markdown?: Renderer<withContent>
     };
     plugins: plugins;
+    #log = {
+        templateError: () => logger.error("Renderers may not init correctly.")
+    }
     constructor() {
         this.context = { config: defaultConfig };
         this.filesContext = []
@@ -27,6 +30,7 @@ class maxwell implements maxwellCore {
             "Renderer<withReading>": "",
             "maxGenerator": []
         }
+        this.renderer = {}
     }
     async init() {
         await this.#setConfig()
@@ -49,7 +53,10 @@ class maxwell implements maxwellCore {
         this.filesContext = await getFilesContext(this.context)
     }
     async #getRouter() {
-        if (!(this.renderer)) throw new Error("renderer not init")
+        if (!(this.renderer.template)) {
+            this.#log.templateError()
+            return;
+        }
         const { template } = this.renderer
         this.filesContext.forEach(pageContext => {
             let _layout = pageContext.frontMatter.layout
@@ -69,12 +76,15 @@ class maxwell implements maxwellCore {
     async #initGenerator() {
         this.filesContext = this.filesContext.concat(
             await Promise.all(this.plugins.maxGenerator.map(
-                async (generator: maxGenerator) => 
+                async (generator: maxGenerator) =>
                     await generator.generate(this.context, this.filesContext)
             )))
     }
     async render() {
-        if (!(this.renderer)) throw new Error("renderer not init")
+        if (!(this.renderer.template) || !(this.renderer.markdown)) {
+            this.#log.templateError()
+            return;
+        }
         const { markdown, template } = this.renderer
         await Promise.all(this.filesContext.map(async (pageContext) => {
             //<Filter Plugin> todo:1 before_content_render
