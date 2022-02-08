@@ -4,4 +4,5 @@ export {
     getDirs, writeFile, forPromiseAll,
     configPath, __dirname
 } from './utils.js'
+export { logger } from "./logger.js"
 export type { context, configure } from './types'
