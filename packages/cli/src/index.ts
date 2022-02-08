@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { logger, defaultConfig, writeFile, configure } from '@maxwellx/context'
 import { promptsInit } from './prompt.js'
 import { maxwell } from '@maxwellx/core'
@@ -40,6 +41,7 @@ program.command('split')
     });
 
 program.command('generate')
+    .alias('g')
     .description('generate site from your source file')
     .action(async () => {
         getPerf(async () => {
@@ -55,6 +57,7 @@ program.command('generate')
             logger.error(error)
         })
     });
+
 program.command('init')
     .description("init your blog with an empty folder")
     .option('-y', 'skip all questions use default value')
