@@ -39,10 +39,7 @@ class maxwell implements maxwellCore {
         await this.setConfig()
         await Promise.all([
             this.#setFilesContext(),
-            this.#loadPlugin().then(async () => {
-                this.#emitEvents()
-                await Promise.all([this.#getRouter(), this.#initGenerator()])
-            })
+            this.#loadPlugin()
         ])
     }
     async setConfig() {
@@ -54,6 +51,8 @@ class maxwell implements maxwellCore {
             template: this.plugins["Renderer<withReading>"],
             markdown: this.plugins["Renderer<withContent>"]
         }
+        this.#emitEvents()
+        await Promise.all([this.#getRouter(), this.#initGenerator()])
     }
     async #setFilesContext() {
         this.filesContext = await getFilesContext(this.context)
