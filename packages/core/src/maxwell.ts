@@ -37,10 +37,8 @@ class maxwell implements maxwellCore {
     }
     async init() {
         await this.setConfig()
-        await Promise.all([
-            this.#setFilesContext(),
-            this.#loadPlugin()
-        ])
+        await this.#setFilesContext()
+        await this.#loadPlugin()
     }
     async setConfig() {
         this.context.config = await readConfig()
