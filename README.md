@@ -14,7 +14,7 @@ A static site generator base on TypeScript for learning purposes.
 
 受 Hexo 启发，许多东西借鉴自他。
 
-## 快速上手
+# 快速上手
 ```markdown
 # npm包暂未发布
 pnpm i @maxwellx/cli --global
@@ -23,9 +23,30 @@ maxwellx init
 maxwellx n "test-post"
 maxwellx g
 ```
+你将会得到一个默认配置文件。 默认的目录结构如下
+
+```
+.
+├── maxwell.config.js
+├── package.json
+├── themes
+├── source
+|   └── post
+└── theme
+```
+
+你可以在 source/post 文件夹下书写你的 markdown 文件。
+
+theme 下是所有的主题目录。
+
+网站的配置信息可以参考 [配置文件](/2022/02/09/config/)。
+
+# 概念介绍
 
 ## layout
 layout 是一个页面的基本样式。如果你在 markdown 的 frontmatter 中传入 layout 值，那么在渲染过程中他将会自动寻找 `layout.<模版引擎文件后缀>` 来进行渲染。 同时，layout 的值也会传入路由中来进行路径的构建。
+
+另外，在默认的源文件目录 `source` 中，每个文件夹代表了其所属的 layout。如果你在 `post` 文件夹下的文件微设置 layout 项，将会默认按其文件夹名称为其 layout 即 layout 为 `post`。
 
 ## 路由规则
 路由规则是 MaxwellX 中非常重要的一环，他承载着将渲染文件根据对应规则写入到对应目录到职能。在 @maxwellx/core 中 通过调用 @maxwellx/router 对其传入上下文中配置文件的路由项来获取对应路由。
