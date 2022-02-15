@@ -115,7 +115,8 @@ class maxwell implements maxwellCore {
         copyFromTo([
             this.context.config.directory.template,
             this.context.config.template,
-            "source"], [
+            "source"
+        ], [
             this.context.config.directory.public
         ])
         // write all rendered files
