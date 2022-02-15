@@ -1,9 +1,10 @@
 #!/usr/bin/env node
-import { logger, defaultConfig, writeFile, configure } from '@maxwellx/context'
+import { maxwell, logger, defaultConfig, writeFile } from '@maxwellx/core'
 import { promptsInit } from './prompt.js'
-import { maxwell } from '@maxwellx/core'
 import { Command } from 'commander'
 import inquirer from 'inquirer'
+import type { configure } from '@maxwellx/core'
+
 const program = new Command();
 const core = new maxwell();
 

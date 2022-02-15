@@ -23,13 +23,11 @@ importers:
   packages/cli:
     specifiers:
       '@maxwellx/context': workspace:^1.0.0
-      '@maxwellx/core': workspace:^1.0.0
       '@types/inquirer': ^8.2.0
       commander: ^9.0.0
       inquirer: ^8.2.0
     dependencies:
       '@maxwellx/context': link:../context
-      '@maxwellx/core': link:../core
       commander: registry.npmmirror.com/commander/9.0.0
       inquirer: registry.npmmirror.com/inquirer/8.2.0
     devDependencies:
