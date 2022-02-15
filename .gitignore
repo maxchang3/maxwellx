@@ -2,3 +2,4 @@ node_modules
 .DS_Store
 lib/
 .pnpm-debug.log
+_test
