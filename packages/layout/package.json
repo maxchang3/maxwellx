@@ -16,6 +16,7 @@
     "@maxwellx/context": "workspace:^1.0.0"
   },
   "devDependencies": {
+    "@types/js-yaml": "^4.0.5",
     "js-yaml": "^4.1.0"
   }
 }
