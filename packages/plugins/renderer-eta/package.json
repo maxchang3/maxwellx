@@ -15,6 +15,6 @@
   "dependencies": {
     "@maxwellx/api": "workspace:^1.0.0",
     "@maxwellx/context": "workspace:^1.0.0",
-    "eta": "^1.12.3"
+    "eta": "^2.0.0"
   }
 }
